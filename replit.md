@@ -1,45 +1,56 @@
-# [Project name]
+# Orbit Market
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Telegram Mini App — маркетплейс внутри Telegram с тёмной темой, нижней навигацией и Lottie-анимациями.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- `pnpm --filter @workspace/tg-mini-app run dev` — запустить фронтенд (управляется workflow `artifacts/tg-mini-app: web`)
+- `pnpm run typecheck` — полная проверка типов по всем пакетам
+- `pnpm run build` — typecheck + сборка всех пакетов
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Frontend: React 19 + Vite 7 + Tailwind CSS 4
+- Telegram SDK: `@telegram-apps/sdk-react`
+- Анимации: `lottie-react`
+- Роутинг: `wouter`
+- UI: shadcn/ui (Radix UI)
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/tg-mini-app/src/App.tsx` — корневой компонент, LoadingScreen, NavBar, MainScreen
+- `artifacts/tg-mini-app/src/index.css` — CSS-переменные темы Orbit Market (не менять на заглушки)
+- `artifacts/tg-mini-app/src/assets/` — SVG-логотипы, Lottie JSON анимации
+- `artifacts/tg-mini-app/src/pages/` — страницы приложения
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Тёмная тема зафиксирована: фон `hsl(220, 13%, 13%)`, акцент `#0088ff` — не переключается.
+- Telegram WebApp API вызывается через нативный `window.Telegram.WebApp` (не через SDK) для максимальной совместимости.
+- Обфускация JS включается только при `NODE_ENV=production` через `vite-plugin-javascript-obfuscator`.
+- SVG иконки подключаются как React-компоненты через `vite-plugin-svgr` (суффикс `?react`).
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Orbit Market — Telegram Mini App (маркетплейс):
+- Загрузочный экран с Lottie-анимацией и прогресс-баром
+- Нижняя навигация (Маркет / Мои подарки / Профиль) с Lottie-иконками и capsule-индикатором
+- Виджет баланса в правом верхнем углу
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Все UI-элементы должны быть рабочими (см. AGENTS.md)
+- Тёмная тема Orbit Market — не менять
+- Шрифт Inter / -apple-system
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- `vite.config.ts` требует переменных `PORT` и `BASE_PATH` — без них упадёт при запуске напрямую.
+- SVG-файлы импортируются с `?react` суффиксом для использования как JSX-компоненты.
+- `javascript-obfuscator` — тяжёлая зависимость, только для production-сборки.
 
-## Pointers
+## Поinters
 
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+- AGENTS.md — обязательные правила разработки для всех агентов
+- Workflow: `artifacts/tg-mini-app: web`
