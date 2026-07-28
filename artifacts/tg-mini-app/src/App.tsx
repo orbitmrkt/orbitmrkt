@@ -197,14 +197,6 @@ function TopRightWidget() {
         </svg>
       </button>
 
-      {/* Burger menu */}
-      <button className="trw-menu" onClick={() => {}}>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-label="burger">
-          <path d="M3 7H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-          <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-          <path d="M3 17H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-        </svg>
-      </button>
     </div>
   );
 }
