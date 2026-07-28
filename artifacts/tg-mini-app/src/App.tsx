@@ -298,14 +298,6 @@ function MarketSearchBar() {
           </button>
         ))}
 
-        {/* Filter icon */}
-        <button className="msb-filter-btn" onClick={() => {}}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-            <path d="M3 5H21" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-            <path d="M6 10H18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-            <path d="M10 15H14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-          </svg>
-        </button>
       </div>
     </div>
   );
