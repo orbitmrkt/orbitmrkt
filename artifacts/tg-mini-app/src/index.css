@@ -438,7 +438,7 @@
 
 .msb-chip-active {
   background: hsl(220, 13%, 22%);
-  border-color: rgba(59, 158, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.18);
   color: rgba(255, 255, 255, 0.9);
 }
 
