@@ -240,32 +240,100 @@ function NavBar({ active, onSelect }: { active: number; onSelect: (i: number) =>
   );
 }
 
+/* ─── Market search & filter block ───────────────────────────────────── */
+
+const FILTER_CHIPS = ['Коллекция', 'Модель', 'Тип'];
+
+function MarketSearchBar() {
+  const [activeFilter, setActiveFilter] = useState<number | null>(null);
+
+  return (
+    <div className="msb-root">
+      {/* Row 1: search + icon buttons */}
+      <div className="msb-row1">
+        <div className="msb-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="msb-search-icon">
+            <circle cx="11" cy="11" r="7.5" stroke="currentColor" strokeWidth="1.8"/>
+            <path d="M16.5 16.5L21 21" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+          </svg>
+          <input
+            className="msb-input"
+            type="text"
+            placeholder="Быстрый поиск"
+            readOnly
+          />
+        </div>
+
+        <div className="msb-actions">
+          {/* Sort */}
+          <button className="msb-action-btn" onClick={() => {}}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M3 6H21" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+              <path d="M6 12H18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+              <path d="M10 18H14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            </svg>
+          </button>
+          {/* Price/sort toggle */}
+          <button className="msb-action-btn" onClick={() => {}}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M7 3L7 21M7 21L4 18M7 21L10 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M17 21L17 3M17 3L14 6M17 3L20 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Row 2: filter chips */}
+      <div className="msb-row2">
+        {FILTER_CHIPS.map((label, i) => (
+          <button
+            key={i}
+            className={`msb-chip${activeFilter === i ? ' msb-chip-active' : ''}`}
+            onClick={() => setActiveFilter(activeFilter === i ? null : i)}
+          >
+            <span>{label}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="msb-chip-arrow">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        ))}
+
+        {/* Filter icon */}
+        <button className="msb-filter-btn" onClick={() => {}}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+            <path d="M3 5H21" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            <path d="M6 10H18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+            <path d="M10 15H14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Main screen ─────────────────────────────────────────────────────── */
 
 function MainScreen() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100dvh',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: 'hsl(220, 13%, 13%)',
-      paddingBottom: 79,
-    }}>
+    <div className="main-screen">
       <TopRightWidget />
-      <img
-        src={orbitLogo}
-        alt="Orbit Market"
-        style={{
-          width: 180,
-          objectFit: 'contain',
-          filter: 'brightness(0) invert(1)',
-          opacity: 0.85,
-        }}
-      />
+
+      {/* Logo header */}
+      <div className="main-header">
+        <img
+          src={orbitLogo}
+          alt="Orbit Market"
+          className="main-logo"
+        />
+      </div>
+
+      {/* Page content */}
+      <div className="main-content">
+        {activeTab === 0 && <MarketSearchBar />}
+      </div>
+
       <NavBar active={activeTab} onSelect={setActiveTab} />
     </div>
   );

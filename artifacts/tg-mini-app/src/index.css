@@ -301,6 +301,178 @@
   background: rgba(255, 255, 255, 0.13);
 }
 
+/* ─── Main screen layout ─────────────────────────────────────────────── */
+
+.main-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: hsl(220, 13%, 13%);
+  padding-bottom: 79px;
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 52px;
+  padding-bottom: 12px;
+}
+
+.main-logo {
+  width: 160px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+.main-content {
+  flex: 1;
+  padding: 0 14px;
+  margin-top: 68px;
+}
+
+/* ─── Market search bar ──────────────────────────────────────────────── */
+
+.msb-root {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Row 1 */
+.msb-row1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.msb-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 14px;
+  background: hsl(220, 13%, 18%);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.msb-search-icon {
+  color: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.msb-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: inherit;
+  caret-color: #3b9eff;
+}
+
+.msb-input::placeholder {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.msb-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.msb-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: hsl(220, 13%, 18%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.msb-action-btn:active {
+  background: hsl(220, 13%, 22%);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Row 2 */
+.msb-row2 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.msb-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 36px;
+  padding: 0 13px;
+  background: hsl(220, 13%, 18%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.msb-chip:active {
+  background: hsl(220, 13%, 22%);
+}
+
+.msb-chip-active {
+  background: hsl(220, 13%, 22%);
+  border-color: rgba(59, 158, 255, 0.35);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.msb-chip-arrow {
+  color: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.msb-chip-active .msb-chip-arrow {
+  color: rgba(59, 158, 255, 0.8);
+}
+
+.msb-filter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: hsl(220, 13%, 18%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.msb-filter-btn:active {
+  background: hsl(220, 13%, 22%);
+  color: rgba(255, 255, 255, 0.8);
+}
+
 @layer base {
   * {
     @apply border-border box-border;
