@@ -354,9 +354,9 @@
   gap: 8px;
   height: 44px;
   padding: 0 14px;
-  background: hsl(220, 13%, 18%);
+  background: rgba(255, 255, 255, 0.07);
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: none;
 }
 
 .msb-search-icon {
@@ -391,8 +391,8 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  background: hsl(220, 13%, 18%);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.07);
+  border: none;
   border-radius: 14px;
   color: rgba(255, 255, 255, 0.55);
   cursor: pointer;
@@ -419,8 +419,8 @@
   gap: 5px;
   height: 36px;
   padding: 0 13px;
-  background: hsl(220, 13%, 18%);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.07);
+  border: none;
   border-radius: 10px;
   color: rgba(255, 255, 255, 0.65);
   font-size: 13px;
@@ -437,8 +437,7 @@
 }
 
 .msb-chip-active {
-  background: hsl(220, 13%, 22%);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.13);
   color: rgba(255, 255, 255, 0.9);
 }
 
@@ -457,8 +456,8 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  background: hsl(220, 13%, 18%);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.07);
+  border: none;
   border-radius: 10px;
   color: rgba(255, 255, 255, 0.45);
   cursor: pointer;
