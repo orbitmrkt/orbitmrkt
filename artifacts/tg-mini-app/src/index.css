@@ -248,8 +248,8 @@
   align-items: center;
   gap: 6px;
   height: 36px;
-  padding: 0 18px;
-  min-width: 120px;
+  padding: 0 14px;
+  min-width: 90px;
   background: rgba(255, 255, 255, 0.07);
   border-radius: 100px;
   border: none;
