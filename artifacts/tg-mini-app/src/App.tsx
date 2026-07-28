@@ -219,7 +219,7 @@ const NAV_ITEMS = [
 
 function NavBar({ active, onSelect }: { active: number; onSelect: (i: number) => void }) {
   return (
-    <nav className="nav-bar-wrapper">
+    <nav className="nav-bar-wrapper text-left flex-row justify-between items-start border-t-[0px] border-r-[0px] border-b-[0px] border-l-[0px] ml-[0px] mr-[0px] gap-[0px]">
       {/* sliding capsule */}
       <div
         className="nav-capsule"
