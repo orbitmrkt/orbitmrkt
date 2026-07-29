@@ -18,3 +18,7 @@
 - **Деплой выполнен.** Проект Vercel `orbit-market` (аккаунт `orbitmrktsupport-1425`),
   прод-URL `https://orbit-market-iota.vercel.app` (HTTP 200, отдаётся Mini App).
   В сборку вошли несохранённые правки `index.css` из архива (overflow-x/max-width).
+- **Смена URL на `orbitmrkt.vercel.app`.** По просьбе — переименован проект Vercel
+  `orbit-market → orbitmrkt`, добавлен домен `orbitmrkt.vercel.app` в проект и
+  привязан к прод-деплою (`vercel domains add` + `vercel alias set`). Публичный 200.
+  Нюанс: голый alias без add domain уходил на Vercel SSO — исправлено через add domain.
