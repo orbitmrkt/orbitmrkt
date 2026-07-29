@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Lottie from 'lottie-react';
 import animationData from './assets/animation.json';
 import orbitLogo from './assets/orbit-market-logo.svg';
+import orbitAvatar from './assets/orbit-avatar.png';
 import LogoNavbar from './assets/logo-navbar.svg?react';
 import myGiftData from './assets/my-gift-icon.json';
 import profileData from './assets/profile-icon.json';
@@ -315,11 +316,10 @@ function MainScreen() {
 
       {/* Logo header */}
       <div className="main-header">
-        <img
-          src={orbitLogo}
-          alt="Orbit Market"
-          className="main-logo"
-        />
+        <div className="brand-pill">
+          <img className="brand-avatar" src={orbitAvatar} alt="Orbit Market" />
+          <span className="brand-name">Orbit Market</span>
+        </div>
       </div>
 
       {/* Page content */}

@@ -300,11 +300,28 @@
   padding-bottom: 12px;
 }
 
-.main-logo {
-  width: 160px;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.85;
+.brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 18px 6px 6px;
+  background: hsl(220, 13%, 18%);
+  border: 1px solid hsl(220, 13%, 24%);
+  border-radius: 999px;
+}
+.brand-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.brand-name {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #ffffff;
 }
 
 .main-content {
@@ -369,6 +386,8 @@
   display: flex;
   gap: 6px;
   margin-left: auto;
+  flex-shrink: 0;
+  padding-left: 4px;
 }
 
 .msb-action-btn {
@@ -395,9 +414,15 @@
 /* Row 2 */
 .msb-row2 {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 7px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.msb-row2::-webkit-scrollbar {
+  display: none;
 }
 
 .msb-chip {
@@ -406,6 +431,7 @@
   gap: 5px;
   height: 36px;
   padding: 0 13px;
+  flex-shrink: 0;
   background: rgba(255, 255, 255, 0.07);
   border: none;
   border-radius: 9999px;
