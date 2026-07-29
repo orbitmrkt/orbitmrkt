@@ -49,3 +49,12 @@
   Build ок, деплой `orbitmrkt.vercel.app` 200. Прим.: 2 пред-существующих ошибки typecheck
   (svgr `?react`, `speed` у Lottie) — не мои, на vite build/деплой не влияют.
 - **Адаптив market bar.** `index.css`: `min-width:0` на `.msb-search`/`.msb-input` (search сжимается, row1 не вылезает), `flex-wrap:wrap` на `.msb-row2` (чипы переносятся), `.main-content` `max-width:480px; margin:auto` (ПК). Build ок, деплой 200.
+- **Адаптация под тему Telegram (light/dark).** `src/lib/theme.ts`: `resolveColorScheme()`
+  (tg.colorScheme → фолбэк prefers-color-scheme) + хук `useTelegramTheme()` (ставит
+  `data-theme` на `<html>`, слушает `themeChanged`). В `index.css` заведены семантические
+  токены `--app-bg/-surface/-elevate*/-text*/-border/-accent*` (тёмные по умолчанию +
+  блок `[data-theme='light']`), захардкоженные цвета в `.main-screen/.brand/.trw/.nav/.msb/.gate`
+  переведены на них. Удалён мёртвый `.msb-filter-btn`. Тесты `theme.test.ts` (8) — всего 20 зелёных.
+  Обновлён `AGENTS.md` (правило «тёмная тема зафиксирована» → «тема адаптивная, красить токенами»).
+  Известный нюанс: белые ассеты (иконки дока — svg/Lottie, сплеш загрузки, лого на гейте)
+  не инвертируются под светлую тему — нужен отдельный проход по ассетам.
