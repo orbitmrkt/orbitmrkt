@@ -570,6 +570,11 @@
 :root[data-theme='dark'] .gate-logo {
   filter: brightness(0) invert(1);
 }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .gate-logo {
+    filter: brightness(0) invert(1);
+  }
+}
 .gate-code {
   font-size: 76px;
   font-weight: 700;
