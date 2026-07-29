@@ -153,7 +153,6 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
         <Lottie
           animationData={animationData}
           loop={false}
-          speed={0.6}
           style={{ width: 160, height: 160 }}
         />
       </div>
@@ -188,7 +187,7 @@ function TopRightWidget() {
   return (
     <div className="trw-root">
       {/* Balance */}
-      <button className="trw-balance pt-[0px] pb-[0px] mt-[9px] mb-[9px] justify-start items-center flex-row gap-[11px]" onClick={() => {}}>
+      <button className="trw-balance pt-[0px] pb-[0px] mt-[9px] mb-[9px] justify-start items-center flex-row gap-[11px]" onClick={() => hapticSelection()}>
         {/* Plus-circle */}
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-label="plus circle" className="trw-icon-blue">
           <path fillRule="evenodd" clipRule="evenodd" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z" fill="currentColor"/>
@@ -249,7 +248,9 @@ function NavBar({ active, onSelect }: { active: number; onSelect: (i: number) =>
 const FILTER_CHIPS = ['Коллекция', 'Модель', 'Тип'];
 
 function MarketSearchBar() {
+  const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState<number | null>(null);
+  const [sortAsc, setSortAsc] = useState(true);
 
   return (
     <div className="msb-root">
@@ -264,7 +265,8 @@ function MarketSearchBar() {
             className="msb-input"
             type="text"
             placeholder="Быстрый поиск"
-            readOnly
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
       </div>
@@ -276,7 +278,10 @@ function MarketSearchBar() {
             <button
               key={i}
               className={`msb-chip${activeFilter === i ? ' msb-chip-active' : ''}`}
-              onClick={() => setActiveFilter(activeFilter === i ? null : i)}
+              onClick={() => {
+                hapticSelection();
+                setActiveFilter(activeFilter === i ? null : i);
+              }}
             >
               <span>{label}</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="msb-chip-arrow">
@@ -288,7 +293,11 @@ function MarketSearchBar() {
 
         <div className="msb-actions">
           {/* Sort */}
-          <button className="msb-action-btn" onClick={() => {}}>
+          <button
+            className="msb-action-btn"
+            onClick={() => hapticSelection()}
+            aria-label="Фильтр"
+          >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M3 6H21" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
               <path d="M6 12H18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
@@ -296,7 +305,14 @@ function MarketSearchBar() {
             </svg>
           </button>
           {/* Price/sort toggle */}
-          <button className="msb-action-btn" onClick={() => {}}>
+          <button
+            className={`msb-action-btn${!sortAsc ? ' msb-chip-active' : ''}`}
+            onClick={() => {
+              hapticSelection();
+              setSortAsc(!sortAsc);
+            }}
+            aria-label="Сортировка по цене"
+          >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M7 3L7 21M7 21L4 18M7 21L10 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M17 21L17 3M17 3L14 6M17 3L20 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -308,7 +324,9 @@ function MarketSearchBar() {
   );
 }
 
-/* ─── Main screen ─────────────────────────────────────────────────────── */
+import { MarketPage } from './pages/MarketPage';
+import { GiftsPage } from './pages/GiftsPage';
+import { ProfilePage } from './pages/ProfilePage';
 
 function MainScreen() {
   const [activeTab, setActiveTab] = useState(0);
@@ -327,7 +345,9 @@ function MainScreen() {
 
       {/* Page content */}
       <div className="main-content">
-        {activeTab === 0 && <MarketSearchBar />}
+        {activeTab === 0 && <MarketPage />}
+        {activeTab === 1 && <GiftsPage />}
+        {activeTab === 2 && <ProfilePage />}
       </div>
 
       <NavBar active={activeTab} onSelect={setActiveTab} />

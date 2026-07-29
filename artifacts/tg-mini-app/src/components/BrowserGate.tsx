@@ -1,10 +1,13 @@
 import Lottie from 'lottie-react';
 import orbitLogo from '../assets/orbit-market-logo.svg';
 import tgIcon from '../assets/open-in-telegram.json';
+import { useTelegramTheme } from '../lib/theme';
 
 const BOT_URL = 'https://t.me/Orbit_mrkt_bot/market';
 
 export default function BrowserGate() {
+  useTelegramTheme();
+
   return (
     <div className="gate-root">
       <img className="gate-logo" src={orbitLogo} alt="Orbit Market" />

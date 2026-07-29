@@ -564,6 +564,11 @@
   height: auto;
   object-fit: contain;
   opacity: 0.96;
+  filter: brightness(0);
+  transition: filter 0.2s ease;
+}
+:root[data-theme='dark'] .gate-logo {
+  filter: brightness(0) invert(1);
 }
 .gate-code {
   font-size: 76px;
