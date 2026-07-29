@@ -65,3 +65,4 @@
 
 
 
+- **Favicon.** Из `IMG_9544.PNG` (аватар) сгенерированы `public/favicon.png` (192) и `public/apple-touch-icon.png` (180); в `index.html` ссылка `favicon.svg` → `favicon.png` + apple-touch. Build ок, деплой (Vercel CLI) 200, отдаётся `image/png`.
