@@ -10,3 +10,11 @@
   на `index.html` (роутинг wouter). Код проекта не менялся; переменные `PORT`/`BASE_PATH`,
   которые требует `vite.config.ts`, прокидываются флагами `-b` при `vercel deploy`.
   Файлы: `vercel.json`, `DEVLOG.md`. Способ деплоя — Vercel CLI (без GitHub).
+- **Фикс загрузки.** Добавлен `.vercelignore` (исключены `attached_assets`, `.git`,
+  `.local`) — у файлов в `attached_assets` битые кириллические имена (mojibake ещё
+  с распаковки zip), из-за чего Vercel CLI падал на `lstat`. Так как `.vercelignore`
+  применяется после обхода дерева, при деплое папка временно выносилась из дерева
+  и возвращалась обратно (без удаления данных).
+- **Деплой выполнен.** Проект Vercel `orbit-market` (аккаунт `orbitmrktsupport-1425`),
+  прод-URL `https://orbit-market-iota.vercel.app` (HTTP 200, отдаётся Mini App).
+  В сборку вошли несохранённые правки `index.css` из архива (overflow-x/max-width).
