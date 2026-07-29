@@ -48,3 +48,4 @@
   `vitest` (`vitest.config.ts`, отдельный от vite.config), `telegram.test.ts` — 12/12 зелёные.
   Build ок, деплой `orbitmrkt.vercel.app` 200. Прим.: 2 пред-существующих ошибки typecheck
   (svgr `?react`, `speed` у Lottie) — не мои, на vite build/деплой не влияют.
+- **Адаптив market bar.** `index.css`: `min-width:0` на `.msb-search`/`.msb-input` (search сжимается, row1 не вылезает), `flex-wrap:wrap` на `.msb-row2` (чипы переносятся), `.main-content` `max-width:480px; margin:auto` (ПК). Build ок, деплой 200.
