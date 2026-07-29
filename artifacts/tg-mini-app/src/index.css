@@ -71,6 +71,49 @@
 
   --app-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --radius: 0.75rem;
+
+  /* Semantic theme tokens (dark defaults; overridden for light below) */
+  --app-bg: #1c2028;
+  --app-surface: #262c35;
+  --app-elevate: rgba(255, 255, 255, 0.07);
+  --app-elevate-strong: rgba(255, 255, 255, 0.14);
+  --app-elevate-active: rgba(255, 255, 255, 0.13);
+  --app-text: rgba(255, 255, 255, 0.9);
+  --app-text-strong: #ffffff;
+  --app-text-muted: rgba(255, 255, 255, 0.55);
+  --app-text-faint: rgba(255, 255, 255, 0.32);
+  --app-border: hsl(220, 13%, 24%);
+  --app-accent: #0088ff;
+  --app-accent-2: #3b9eff;
+}
+
+/* Light theme (Telegram light client) */
+:root[data-theme='light'] {
+  --background: 0 0% 100%;
+  --foreground: 220 13% 13%;
+  --card: 220 14% 96%;
+  --card-foreground: 220 13% 13%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 13% 13%;
+  --secondary: 220 14% 94%;
+  --secondary-foreground: 220 10% 25%;
+  --muted: 220 14% 94%;
+  --muted-foreground: 220 9% 46%;
+  --accent: 220 14% 92%;
+  --accent-foreground: 220 13% 13%;
+  --border: 220 13% 88%;
+  --input: 220 13% 90%;
+
+  --app-bg: #ffffff;
+  --app-surface: #f2f3f5;
+  --app-elevate: rgba(0, 0, 0, 0.05);
+  --app-elevate-strong: rgba(0, 0, 0, 0.09);
+  --app-elevate-active: rgba(0, 0, 0, 0.08);
+  --app-text: rgba(0, 0, 0, 0.9);
+  --app-text-strong: #000000;
+  --app-text-muted: rgba(0, 0, 0, 0.5);
+  --app-text-faint: rgba(0, 0, 0, 0.34);
+  --app-border: rgba(0, 0, 0, 0.1);
 }
 
 /* ── Twinkling star animations (3 independent rhythms) ───────────────── */
@@ -134,8 +177,8 @@
   z-index: 9;
   bottom: var(--custom-safe-area-bottom, 20px);
   border-radius: 1000px;
-  background-color: hsl(220, 13%, 16%);
-  border: 1px solid hsl(220, 13%, 24%);
+  background-color: var(--app-surface);
+  border: 1px solid var(--app-border);
   padding: 4px;
   width: calc(100% - 30px);
   max-width: 410px;
@@ -177,7 +220,7 @@
   font-size: 11px;
   font-weight: 600;
   line-height: 1;
-  color: rgba(255,255,255,0.35);
+  color: var(--app-text-faint);
   transition: color 0.2s;
   white-space: nowrap;
 }
@@ -195,7 +238,7 @@
   bottom: 4px;
   width: calc((100% - 8px) / 3);
   border-radius: 100px;
-  background: hsla(0, 0%, 75%, 0.1);
+  background: var(--app-elevate);
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   z-index: 0;
@@ -207,7 +250,7 @@
 }
 
 .nav-item.active .nav-label {
-  color: rgba(255,255,255,1);
+  color: var(--app-text-strong);
 }
 
 /* ─── Top-right widget ────────────────────────────────────────────────── */
@@ -231,7 +274,7 @@
   height: 36px;
   padding: 0 14px;
   min-width: 90px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--app-elevate);
   border-radius: 100px;
   border: none;
   cursor: pointer;
@@ -244,7 +287,7 @@
 }
 
 .trw-balance:active {
-  background: rgba(255, 255, 255, 0.13);
+  background: var(--app-elevate-active);
 }
 
 .trw-balance svg {
@@ -254,7 +297,7 @@
 .trw-balance-text {
   font-size: 14px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--app-text-strong);
   line-height: 1;
 }
 
@@ -268,18 +311,18 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--app-elevate);
   border-radius: 100px;
   border: none;
   cursor: pointer;
-  color: #ffffff;
+  color: var(--app-text-strong);
   -webkit-tap-highlight-color: transparent;
   transition: background 0.18s;
   flex-shrink: 0;
 }
 
 .trw-menu:active {
-  background: rgba(255, 255, 255, 0.13);
+  background: var(--app-elevate-active);
 }
 
 /* ─── Main screen layout ─────────────────────────────────────────────── */
@@ -288,7 +331,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  background: hsl(220, 13%, 13%);
+  background: var(--app-bg);
   padding-bottom: 79px;
 }
 
@@ -305,8 +348,8 @@
   align-items: center;
   gap: 7px;
   padding: 3px 12px 3px 3px;
-  background: hsl(220, 13%, 18%);
-  border: 1px solid hsl(220, 13%, 24%);
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
   border-radius: 999px;
 }
 .brand-avatar {
@@ -321,7 +364,7 @@
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.01em;
-  color: #ffffff;
+  color: var(--app-text-strong);
 }
 
 .main-content {
@@ -355,13 +398,13 @@
   gap: 8px;
   height: 44px;
   padding: 0 14px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--app-elevate);
   border-radius: 9999px;
   border: none;
 }
 
 .msb-search-icon {
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--app-text-faint);
   flex-shrink: 0;
 }
 
@@ -373,13 +416,13 @@
   outline: none;
   font-size: 14px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--app-text);
   font-family: inherit;
-  caret-color: #3b9eff;
+  caret-color: var(--app-accent-2);
 }
 
 .msb-input::placeholder {
-  color: rgba(255, 255, 255, 0.28);
+  color: var(--app-text-faint);
 }
 
 .msb-actions {
@@ -394,10 +437,10 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--app-elevate-strong);
   border: none;
   border-radius: 9999px;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--app-text);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: background 0.15s, color 0.15s;
@@ -405,8 +448,8 @@
 }
 
 .msb-action-btn:active {
-  background: rgba(255, 255, 255, 0.22);
-  color: #ffffff;
+  background: var(--app-elevate-strong);
+  color: var(--app-text-strong);
 }
 
 /* Row 2 */
@@ -439,10 +482,10 @@
   height: 36px;
   padding: 0 13px;
   flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--app-elevate);
   border: none;
   border-radius: 9999px;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--app-text-muted);
   font-size: 13px;
   font-weight: 500;
   font-family: inherit;
@@ -453,43 +496,21 @@
 }
 
 .msb-chip:active {
-  background: hsl(220, 13%, 22%);
+  background: var(--app-elevate-active);
 }
 
 .msb-chip-active {
-  background: rgba(255, 255, 255, 0.13);
-  color: rgba(255, 255, 255, 0.9);
+  background: var(--app-elevate-active);
+  color: var(--app-text);
 }
 
 .msb-chip-arrow {
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--app-text-faint);
   flex-shrink: 0;
 }
 
 .msb-chip-active .msb-chip-arrow {
   color: rgba(59, 158, 255, 0.8);
-}
-
-.msb-filter-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.07);
-  border: none;
-  border-radius: 10px;
-  color: rgba(255, 255, 255, 0.45);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: background 0.15s, color 0.15s;
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-.msb-filter-btn:active {
-  background: hsl(220, 13%, 22%);
-  color: rgba(255, 255, 255, 0.8);
 }
 
 @layer base {
@@ -529,7 +550,7 @@
   justify-content: center;
   gap: 22px;
   padding: 32px 24px;
-  background: hsl(220, 13%, 13%);
+  background: var(--app-bg);
   text-align: center;
 }
 .gate-logo {
@@ -547,14 +568,14 @@
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.02em;
-  color: hsl(0, 0%, 92%);
+  color: var(--app-text-strong);
 }
 .gate-text {
   max-width: 320px;
   margin: 0;
   font-size: 15px;
   line-height: 1.5;
-  color: hsl(0, 0%, 72%);
+  color: var(--app-text-muted);
 }
 .gate-btn {
   display: inline-flex;

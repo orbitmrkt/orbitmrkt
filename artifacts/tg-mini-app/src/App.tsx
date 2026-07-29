@@ -7,6 +7,7 @@ import LogoNavbar from './assets/logo-navbar.svg?react';
 import myGiftData from './assets/my-gift-icon.json';
 import profileData from './assets/profile-icon.json';
 import { isInTelegram } from './lib/telegram';
+import { useTelegramTheme } from './lib/theme';
 import BrowserGate from './components/BrowserGate';
 
 /* ─── Telegram setup ──────────────────────────────────────────────────── */
@@ -339,6 +340,7 @@ function MainScreen() {
 export default function App() {
   const inTelegram = isInTelegram();
   useTelegramSetup();
+  useTelegramTheme();
   const [loaded, setLoaded] = useState(false);
 
   if (!inTelegram) return <BrowserGate />;
