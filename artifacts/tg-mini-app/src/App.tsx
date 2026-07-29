@@ -251,7 +251,7 @@ function MarketSearchBar() {
 
   return (
     <div className="msb-root">
-      {/* Row 1: search + icon buttons */}
+      {/* Row 1: search (full width) */}
       <div className="msb-row1">
         <div className="msb-search">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="msb-search-icon">
@@ -265,6 +265,22 @@ function MarketSearchBar() {
             readOnly
           />
         </div>
+      </div>
+
+      {/* Row 2: filter chips + action buttons */}
+      <div className="msb-row2">
+        {FILTER_CHIPS.map((label, i) => (
+          <button
+            key={i}
+            className={`msb-chip${activeFilter === i ? ' msb-chip-active' : ''}`}
+            onClick={() => setActiveFilter(activeFilter === i ? null : i)}
+          >
+            <span>{label}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="msb-chip-arrow">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        ))}
 
         <div className="msb-actions">
           {/* Sort */}
@@ -283,23 +299,6 @@ function MarketSearchBar() {
             </svg>
           </button>
         </div>
-      </div>
-
-      {/* Row 2: filter chips */}
-      <div className="msb-row2">
-        {FILTER_CHIPS.map((label, i) => (
-          <button
-            key={i}
-            className={`msb-chip${activeFilter === i ? ' msb-chip-active' : ''}`}
-            onClick={() => setActiveFilter(activeFilter === i ? null : i)}
-          >
-            <span>{label}</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="msb-chip-arrow">
-              <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        ))}
-
       </div>
     </div>
   );
