@@ -4,8 +4,24 @@ export type ColorScheme = 'light' | 'dark';
 
 interface TgThemeApp {
   colorScheme?: unknown;
+  themeParams?: Record<string, unknown>;
   onEvent?: (event: string, cb: () => void) => void;
   offEvent?: (event: string, cb: () => void) => void;
+}
+
+/**
+ * Прокидывает цвета Telegram-темы (`themeParams`) в CSS-переменные `--tg-theme-*`
+ * на `<html>`, чтобы наши токены `--app-*` могли на них опираться. Гарантирует
+ * наличие переменных даже если версия клиента их сама не выставляет.
+ */
+function applyThemeParams(tg: TgThemeApp | null): void {
+  const params = tg?.themeParams;
+  if (!params || typeof params !== 'object') return;
+  const root = document.documentElement;
+  for (const [key, value] of Object.entries(params)) {
+    if (typeof value !== 'string') continue;
+    root.style.setProperty(`--tg-theme-${key.replace(/_/g, '-')}`, value);
+  }
 }
 
 /**
@@ -43,6 +59,7 @@ export function useTelegramTheme(): void {
     const apply = () => {
       const scheme = resolveColorScheme(tg, mq?.matches ?? false);
       document.documentElement.dataset.theme = scheme;
+      applyThemeParams(tg);
     };
 
     apply();
