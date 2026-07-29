@@ -357,13 +357,17 @@ function MainScreen() {
 
 /* ─── Root ────────────────────────────────────────────────────────────── */
 
+// ВРЕМЕННО на период разработки и тестов: проверка initData (403-гейт) отключена,
+// чтобы приложение открывалось в обычном браузере. Вернуть защиту — GATE_ENABLED = true.
+const GATE_ENABLED: boolean = false;
+
 export default function App() {
   const inTelegram = isInTelegram();
   useTelegramSetup();
   useTelegramTheme();
   const [loaded, setLoaded] = useState(false);
 
-  if (!inTelegram) return <BrowserGate />;
+  if (GATE_ENABLED && !inTelegram) return <BrowserGate />;
 
   return loaded
     ? <MainScreen />
