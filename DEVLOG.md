@@ -39,3 +39,12 @@
   (`vite build` ок), передеплой 200. Побочно: деплой больше не требует временного
   выноса папки (битых кириллических имён в дереве не осталось).
 - **Заголовок/описание.** `title`/`og:title`/`twitter:title` + 3 `description` в `index.html` → «Orbit Market — Your coolest NFT Market in Telegram». Передеплой 200.
+- **Фича: блокировка входа из браузера (403-гейт).** `src/lib/telegram.ts` — чистая
+  `isInTelegram()` (platform !== 'unknown' / initData / user); `components/BrowserGate.tsx`
+  — экран с лого, «Ошибка 403», текстом и округлой сине-голубой кнопкой «Открыть в Telegram»
+  (Lottie-иконка `open-in-telegram.json`) → `t.me/Orbit_mrkt_bot/market`; стили `.gate-*`
+  в `index.css`; врезка в `App.tsx` (`if(!isInTelegram()) return <BrowserGate/>`, ранний
+  return после хуков). Лого PNG(2.16МБ)→SVG(14.7КБ) везде, старый png удалён. Тесты:
+  `vitest` (`vitest.config.ts`, отдельный от vite.config), `telegram.test.ts` — 12/12 зелёные.
+  Build ок, деплой `orbitmrkt.vercel.app` 200. Прим.: 2 пред-существующих ошибки typecheck
+  (svgr `?react`, `speed` у Lottie) — не мои, на vite build/деплой не влияют.
