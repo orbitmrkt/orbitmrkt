@@ -38,3 +38,4 @@
   `tg-mini-app/vite.config.ts` + её строка из `.vercelignore`. Сборка проверена
   (`vite build` ок), передеплой 200. Побочно: деплой больше не требует временного
   выноса папки (битых кириллических имён в дереве не осталось).
+- **Заголовок/описание.** `title`/`og:title`/`twitter:title` + 3 `description` в `index.html` → «Orbit Market — Your coolest NFT Market in Telegram». Передеплой 200.
