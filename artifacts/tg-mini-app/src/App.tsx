@@ -1,10 +1,12 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Lottie from 'lottie-react';
 import animationData from './assets/animation.json';
-import orbitLogo from './assets/orbit-market-logo.png';
+import orbitLogo from './assets/orbit-market-logo.svg';
 import LogoNavbar from './assets/logo-navbar.svg?react';
 import myGiftData from './assets/my-gift-icon.json';
 import profileData from './assets/profile-icon.json';
+import { isInTelegram } from './lib/telegram';
+import BrowserGate from './components/BrowserGate';
 
 /* ─── Telegram setup ──────────────────────────────────────────────────── */
 
@@ -334,8 +336,11 @@ function MainScreen() {
 /* ─── Root ────────────────────────────────────────────────────────────── */
 
 export default function App() {
+  const inTelegram = isInTelegram();
   useTelegramSetup();
   const [loaded, setLoaded] = useState(false);
+
+  if (!inTelegram) return <BrowserGate />;
 
   return loaded
     ? <MainScreen />
