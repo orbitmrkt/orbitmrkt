@@ -268,20 +268,22 @@ function MarketSearchBar() {
         </div>
       </div>
 
-      {/* Row 2: filter chips + action buttons */}
+      {/* Row 2: scrollable filter chips + fixed action buttons */}
       <div className="msb-row2">
-        {FILTER_CHIPS.map((label, i) => (
-          <button
-            key={i}
-            className={`msb-chip${activeFilter === i ? ' msb-chip-active' : ''}`}
-            onClick={() => setActiveFilter(activeFilter === i ? null : i)}
-          >
-            <span>{label}</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="msb-chip-arrow">
-              <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        ))}
+        <div className="msb-chips">
+          {FILTER_CHIPS.map((label, i) => (
+            <button
+              key={i}
+              className={`msb-chip${activeFilter === i ? ' msb-chip-active' : ''}`}
+              onClick={() => setActiveFilter(activeFilter === i ? null : i)}
+            >
+              <span>{label}</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="msb-chip-arrow">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          ))}
+        </div>
 
         <div className="msb-actions">
           {/* Sort */}
