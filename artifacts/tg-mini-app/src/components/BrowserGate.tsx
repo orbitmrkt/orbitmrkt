@@ -9,7 +9,7 @@ export default function BrowserGate() {
     <div className="gate-root">
       <img className="gate-logo" src={orbitLogo} alt="Orbit Market" />
 
-      <div className="gate-badge">Ошибка 403</div>
+      <div className="gate-code">403</div>
 
       <p className="gate-text">
         Увы, Orbit Market нельзя открыть в браузере, пожалуйста, откройте его

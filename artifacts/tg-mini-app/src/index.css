@@ -513,21 +513,21 @@
   text-align: center;
 }
 .gate-logo {
-  width: min(240px, 62%);
+  position: absolute;
+  top: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(220px, 60%);
   height: auto;
   object-fit: contain;
   opacity: 0.96;
-  margin-bottom: 4px;
 }
-.gate-badge {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: hsl(211, 100%, 62%);
-  background: hsla(211, 100%, 50%, 0.12);
-  border: 1px solid hsla(211, 100%, 50%, 0.25);
-  padding: 6px 14px;
-  border-radius: 999px;
+.gate-code {
+  font-size: 76px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: hsl(0, 0%, 92%);
 }
 .gate-text {
   max-width: 320px;
@@ -547,26 +547,20 @@
   font-size: 16px;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 8px 24px hsla(211, 100%, 50%, 0.35);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  transition: transform 0.18s ease, filter 0.18s ease;
   -webkit-tap-highlight-color: transparent;
 }
 .gate-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px hsla(211, 100%, 50%, 0.45);
   filter: brightness(1.05);
 }
 .gate-btn:active {
   transform: translateY(0) scale(0.98);
-  box-shadow: 0 6px 18px hsla(211, 100%, 50%, 0.3);
 }
 .gate-btn-icon {
   display: inline-flex;
   width: 28px;
   height: 28px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.14);
 }
 .gate-btn-label {
   white-space: nowrap;
