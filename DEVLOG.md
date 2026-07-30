@@ -16,6 +16,8 @@
   заведены один раз в `:root` через `color-mix` от `--app-bg`/`--app-surface` (сами
   меняются per-theme). (4) Затемнение дока `--app-dock-bg` 0.45→0.35 (dark+light).
   Правки — только `index.css` (саб-агент Haiku, проверено git diff). vitest 25/25, build ок.
+  Пуш `366df5f..6f8482f` в GitHub; `vercel deploy --prod` (deployment `orbitmrkt-40frd3h7y`),
+  `orbitmrkt.vercel.app` = HTTP 200.
 - **Фикс «плавающего» баланса при скролле + прозрачнее док.** (1) Экран переведён на
   паттерн внутреннего скролл-контейнера: `.main-screen` → `height:100dvh; overflow:hidden`
   (убран `padding-bottom:79px`), скролл ушёл внутрь `.main-content` (`min-height:0;
