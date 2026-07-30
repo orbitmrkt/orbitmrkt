@@ -843,7 +843,20 @@
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: transform 0.15s ease;
+  animation: cart-fab-in 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
+
+@keyframes cart-fab-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .cart-fab:active {
   transform: scale(0.96);
 }
