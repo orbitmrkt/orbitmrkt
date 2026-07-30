@@ -415,10 +415,10 @@
   pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
   transition: transform 0.15s ease;
-  animation: brand-pill-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: brand-pill-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 .brand-pill:active {
-  transform: scale(0.95);
+  transform: scale(0.92);
 }
 
 @keyframes brand-pill-in {
