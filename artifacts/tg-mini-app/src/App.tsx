@@ -333,14 +333,13 @@ function MainScreen() {
 
   return (
     <div className="main-screen">
-      <TopRightWidget />
-
-      {/* Logo header */}
-      <div className="main-header">
+      {/* Sticky top bar — logo + balance stay pinned while content scrolls */}
+      <div className="top-bar">
         <div className="brand-pill">
           <img className="brand-avatar" src={orbitAvatar} alt="Orbit Market" />
           <span className="brand-name">Orbit Market</span>
         </div>
+        <TopRightWidget />
       </div>
 
       {/* Page content */}
