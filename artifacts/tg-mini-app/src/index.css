@@ -1342,17 +1342,25 @@
   justify-content: center;
   flex-shrink: 0;
 }
+/* Радиальное затухание узора к краям (виньетка), как в Telegram. */
+.gd-pattern-fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(circle at 50% 44%, #000 38%, rgba(0, 0, 0, 0.55) 72%, transparent 100%);
+  mask-image: radial-gradient(circle at 50% 44%, #000 38%, rgba(0, 0, 0, 0.55) 72%, transparent 100%);
+}
 .gd-pattern {
   position: absolute;
   inset: 0;
-  /* Два слоя со смещением — шахматный (staggered) узор, как в Telegram. */
+  /* Два слоя со смещением — staggered-грид символов, как в Telegram. */
   -webkit-mask-repeat: repeat, repeat;
   mask-repeat: repeat, repeat;
-  -webkit-mask-size: 60px, 60px;
-  mask-size: 60px, 60px;
-  -webkit-mask-position: 0 0, 30px 30px;
-  mask-position: 0 0, 30px 30px;
-  opacity: 0.2;
+  -webkit-mask-size: 56px, 56px;
+  mask-size: 56px, 56px;
+  -webkit-mask-position: 0 0, 28px 28px;
+  mask-position: 0 0, 28px 28px;
+  opacity: 0.45;
   pointer-events: none;
 }
 .gd-card__actions {

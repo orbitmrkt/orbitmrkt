@@ -85,14 +85,16 @@ export function GiftDetailSheet() {
               }
             >
               {d.symbolPng && c && (
-                <div
-                  className="gd-pattern"
-                  style={{
-                    WebkitMaskImage: `url("${d.symbolPng}"), url("${d.symbolPng}")`,
-                    maskImage: `url("${d.symbolPng}"), url("${d.symbolPng}")`,
-                    backgroundColor: c.patternColor,
-                  }}
-                />
+                <div className="gd-pattern-fade">
+                  <div
+                    className="gd-pattern"
+                    style={{
+                      WebkitMaskImage: `url("${d.symbolPng}"), url("${d.symbolPng}")`,
+                      maskImage: `url("${d.symbolPng}"), url("${d.symbolPng}")`,
+                      backgroundColor: c.patternColor,
+                    }}
+                  />
+                </div>
               )}
               <div className="gd-card__actions">
                 <button
