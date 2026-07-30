@@ -22,6 +22,7 @@ interface TelegramWebApp {
   ready(): void;
   expand(): void;
   requestFullscreen?(): void;
+  openTelegramLink?(url: string): void;
   HapticFeedback?: {
     selectionChanged(): void;
     impactOccurred(style: 'light' | 'medium' | 'heavy' | 'rigid' | 'soft'): void;
@@ -36,6 +37,21 @@ function getTg(): TelegramWebApp | null {
 function hapticSelection() {
   try {
     getTg()?.HapticFeedback?.selectionChanged();
+  } catch { /* noop */ }
+}
+
+const BOT_URL = 'https://t.me/OrbitMrktBot';
+
+function openBot() {
+  try {
+    const tg = getTg();
+    if (tg?.openTelegramLink) {
+      tg.openTelegramLink(BOT_URL);
+      return;
+    }
+  } catch { /* noop */ }
+  try {
+    window.open(BOT_URL, '_blank');
   } catch { /* noop */ }
 }
 
@@ -343,10 +359,17 @@ function MainScreen() {
     <div className="main-screen">
       {/* Logo header */}
       <div className={`main-header${headerShown ? ' is-visible' : ''}`}>
-        <div className="brand-pill">
+        <button
+          type="button"
+          className="brand-pill"
+          onClick={() => {
+            hapticSelection();
+            openBot();
+          }}
+        >
           <img className="brand-avatar" src={orbitAvatar} alt="Orbit Market" />
           <span className="brand-name">Orbit Market</span>
-        </div>
+        </button>
       </div>
 
       {/* Page content */}

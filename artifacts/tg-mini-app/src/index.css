@@ -409,6 +409,27 @@
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease;
+  animation: brand-pill-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.brand-pill:active {
+  transform: scale(0.95);
+}
+
+@keyframes brand-pill-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 .brand-avatar {
   width: 24px;
@@ -1084,6 +1105,7 @@
 
 /* ─── Profile ────────────────────────────────────────────────────────── */
 .profile-page {
+  margin-top: -84px;
   padding: 8px 4px 40px;
 }
 .profile-head {

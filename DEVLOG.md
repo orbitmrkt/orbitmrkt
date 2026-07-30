@@ -4,6 +4,13 @@
 
 ## 2026-07-30
 
+- **Профиль выше + лого-пилюля: анимация + кнопка-ссылка на бота.** (1) `.profile-page`
+  `margin-top:-84px` — шапка профиля (аватар/имя/@юз) поднята выше. (2) Лого-пилюля
+  `.brand-pill` из `<div>` → `<button>` с `openBot()` → `tg.openTelegramLink('https://t.me/OrbitMrktBot')`
+  (фолбэк `window.open`); в интерфейс `TelegramWebApp` добавлен `openTelegramLink`. Анимация
+  появления `@keyframes brand-pill-in` (fade+scale+slide, 0.5s) + `:active` scale. КРИТ:
+  `.brand-pill{pointer-events:auto}` — у `.main-header` стоит `pointer-events:none`, иначе клик
+  не проходит. Файлы: `App.tsx`, `index.css`. build ок, vitest 77/77. Push + deploy.
 - **Профиль — Фаза B: уровень через Telegram-рейтинг (StarsRating).** Новый `api/rating.ts`
   (serverless): принимает `{initData}`, **валидирует подпись по `BOT_TOKEN`** (HMAC-SHA256,
   алгоритм Telegram: secret=HMAC("WebAppData",token); проверка data-check-string; +freshness
