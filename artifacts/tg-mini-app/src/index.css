@@ -1126,22 +1126,31 @@
 .cart-selbar__all,
 .cart-selbar__del {
   border: none;
-  background: none;
-  padding: 4px 2px;
+  padding: 7px 13px;
+  border-radius: 999px;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
+  white-space: nowrap;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.cart-selbar__all:active,
+.cart-selbar__del:active {
+  transform: scale(0.96);
 }
 .cart-selbar__all {
   color: var(--app-accent);
+  background: color-mix(in srgb, var(--app-accent) 15%, transparent);
 }
 .cart-selbar__del {
-  color: var(--app-destructive, #e0524f);
+  color: #ff5a57;
+  background: color-mix(in srgb, #ff5a57 15%, transparent);
 }
 .cart-selbar__del:disabled {
   color: var(--app-text-faint);
+  background: var(--app-elevate);
   cursor: default;
 }
 

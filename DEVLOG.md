@@ -4,6 +4,10 @@
 
 ## 2026-07-30
 
+- **Корзина: кнопки выбора/удаления как чипы.** `.cart-selbar__all`/`__del` из голого текста
+  (переносился на 2 строки) → компактные чипы: фон `color-mix` (accent / красный #ff5a57),
+  `border-radius:999px`, `white-space:nowrap`, `:active` scale, disabled-фон `--app-elevate`.
+  Только `index.css`. build ок. Push + deploy.
 - **Корзина: выбор товаров + кнопка «Купить».** В `CartSheet` добавлен выбор (модель
   «снятые id» → новые по умолчанию выбраны): у товаров чекбокс `.cart-check`, вся строка —
   тогл выбора, выбранные с обводкой `.cart-item.is-selected` (border accent). Сверху панель
