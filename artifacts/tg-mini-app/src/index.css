@@ -622,8 +622,8 @@
 /* ─── Gift cards grid ────────────────────────────────────────── */
 .gift-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
   padding: 12px 0 4px;
 }
 
@@ -631,11 +631,15 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 6px;
-  border-radius: 16px;
+  padding: 8px;
+  border-radius: 18px;
   background: var(--app-surface);
   border: 1px solid var(--app-border);
   color: var(--app-text);
+}
+
+.gift-card__media-wrap {
+  position: relative;
 }
 
 .gift-card__media {
@@ -644,7 +648,7 @@
   aspect-ratio: 1 / 1;
   padding: 0;
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
   background: var(--app-elevate);
   cursor: pointer;
@@ -661,12 +665,12 @@
 .gift-card__body {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  padding-top: 6px;
+  gap: 4px;
+  padding-top: 8px;
 }
 
 .gift-card__name {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
   color: var(--app-text-strong);
@@ -676,7 +680,7 @@
 }
 
 .gift-card__number {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.2;
   color: var(--app-text-muted);
   white-space: nowrap;
@@ -687,7 +691,6 @@
 .gift-card__actions {
   display: flex;
   align-items: center;
-  gap: 4px;
   margin-top: 2px;
 }
 
@@ -697,14 +700,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  height: 28px;
-  padding: 0 6px;
-  border-radius: 9px;
+  gap: 5px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 11px;
   border: none;
   background: var(--app-accent);
   color: var(--tg-theme-button-text-color, #fff);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
@@ -716,13 +719,13 @@
   filter: brightness(1.1);
 }
 .gift-card__price:active {
-  transform: scale(0.96);
+  transform: scale(0.97);
 }
 
 .gift-card__price-icon {
   display: inline-flex;
-  width: 13px;
-  height: 13px;
+  width: 15px;
+  height: 15px;
   flex: none;
 }
 .gift-card__price-icon svg {
@@ -734,30 +737,34 @@
   text-overflow: ellipsis;
 }
 
+/* Basket — floating overlay on the top-right corner of the image */
 .gift-card__basket {
-  flex: none;
-  width: 26px;
-  height: 28px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 9px;
-  border: 1px solid var(--app-border);
-  background: var(--app-elevate);
-  color: var(--app-text-muted);
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.45);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  color: #fff;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
 }
 .gift-card__basket svg {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
 }
 .gift-card__basket:active {
-  transform: scale(0.94);
+  transform: scale(0.9);
 }
 .gift-card__basket.is-in {
   background: var(--app-accent);
-  border-color: transparent;
   color: var(--tg-theme-button-text-color, #fff);
 }

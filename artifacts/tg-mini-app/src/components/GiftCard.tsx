@@ -43,20 +43,34 @@ export function GiftCard({ gift }: { gift: Gift }) {
 
   return (
     <div className="gift-card">
-      <button
-        type="button"
-        className="gift-card__media"
-        onClick={() => hapticSelection()}
-        aria-label={`${gift.name} #${gift.number}`}
-      >
-        <img
-          className="gift-card__img"
-          src={gift.image}
-          alt={gift.name}
-          loading="lazy"
-          decoding="async"
-        />
-      </button>
+      <div className="gift-card__media-wrap">
+        <button
+          type="button"
+          className="gift-card__media"
+          onClick={() => hapticSelection()}
+          aria-label={`${gift.name} #${gift.number}`}
+        >
+          <img
+            className="gift-card__img"
+            src={gift.image}
+            alt={gift.name}
+            loading="lazy"
+            decoding="async"
+          />
+        </button>
+
+        <button
+          type="button"
+          className={`gift-card__basket${inBasket ? ' is-in' : ''}`}
+          onClick={() => {
+            hapticImpact('light');
+            setInBasket((v) => !v);
+          }}
+          aria-label={inBasket ? 'Убрать из корзины' : 'В корзину'}
+        >
+          <BasketIcon />
+        </button>
+      </div>
 
       <div className="gift-card__body">
         <div className="gift-card__name">{gift.name}</div>
@@ -73,18 +87,6 @@ export function GiftCard({ gift }: { gift: Gift }) {
               <GramIcon />
             </span>
             <span className="gift-card__price-value">{gift.price}</span>
-          </button>
-
-          <button
-            type="button"
-            className={`gift-card__basket${inBasket ? ' is-in' : ''}`}
-            onClick={() => {
-              hapticImpact('light');
-              setInBasket((v) => !v);
-            }}
-            aria-label={inBasket ? 'Убрать из корзины' : 'В корзину'}
-          >
-            <BasketIcon />
           </button>
         </div>
       </div>
