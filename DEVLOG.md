@@ -15,7 +15,12 @@
   `.nav-bar-wrapper` переведён на него, блюр 18→24px. `.trw-balance` и `.brand-pill`
   оставлены на `--app-surface-blur` (их прозрачность не менялась). Правки — только
   `index.css` (саб-агент Haiku, проверено git diff). Тесты vitest 25/25 зелёные,
-  `vite build` ок. Деплой — отдельным шагом по согласованию.
+  `vite build` ок.
+- **Пуш на GitHub.** `main` `1d8843a..366df5f` в `github.com/orbitmrkt/orbitmrkt`
+  через SSH (алиас `github-orbitmrkt`, ключ `id_ed25519_orbitmrkt`), fast-forward.
+- **Деплой на Vercel.** `vercel deploy --prod` (проект `orbit-market`/`orbitmrkt`),
+  deployment `dpl_99caXQN2sTkLsQt6pYxjvG1QjuJU`, READY. Публичный `orbitmrkt.vercel.app`
+  = HTTP 200. (Голый deploy-URL 302 — Deployment Protection, как и раньше.)
 
 ## 2026-07-29
 
