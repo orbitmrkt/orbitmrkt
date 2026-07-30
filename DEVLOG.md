@@ -4,6 +4,17 @@
 
 ## 2026-07-30
 
+- **Профиль — Фаза B: уровень через Telegram-рейтинг (StarsRating).** Новый `api/rating.ts`
+  (serverless): принимает `{initData}`, **валидирует подпись по `BOT_TOKEN`** (HMAC-SHA256,
+  алгоритм Telegram: secret=HMAC("WebAppData",token); проверка data-check-string; +freshness
+  auth_date ≤ 24ч) → `getChat(user_id)` → `ChatFullInfo.rating` → отдаёт `{level, rating,
+  currentLevelRating, nextLevelRating}` или `{level:null}`. Web Crypto (subtle) + ambient-типы
+  (как bot.ts, без @types/node). Хук `lib/useTgRating.ts` шлёт `initData` из
+  `Telegram.WebApp.initData` → `LevelBadge` в `ProfilePage` загорается при наличии рейтинга.
+  Алгоритм валидации проверен в песочнице (valid→ok, чужой токен/подделка→fail). E2E: подписал
+  initData реальным токеном → 200; 400 без body, 401 на битой подписи. У justidev рейтинга нет
+  (getChat: private-чат есть, поля `rating` нет) → уровень скрыт, как и задумано. build ок,
+  vitest 77/77. Push + deploy.
 - **Бот @OrbitMrktBot: приветствие по /start (вебхук на Vercel).** Новый `api/bot.ts` —
   serverless-функция Vercel: на `/start` шлёт приветствие (HTML: blockquote + i + кастом-эмодзи
   👇 `5470177992950946662`) с инлайн-кнопкой **Open** → `t.me/OrbitMrktBot/app`. Фолбэк на
