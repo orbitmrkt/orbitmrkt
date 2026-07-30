@@ -76,7 +76,6 @@
   --app-bg: var(--tg-theme-bg-color, #1c2028);
   --app-surface: var(--tg-theme-secondary-bg-color, #262c35);
   --app-surface-blur: rgba(28, 32, 40, 0.72);
-  --app-card: rgba(0, 0, 0, 0.28);
   --app-elevate: rgba(255, 255, 255, 0.07);
   --app-elevate-strong: rgba(255, 255, 255, 0.14);
   --app-elevate-active: rgba(255, 255, 255, 0.13);
@@ -109,7 +108,6 @@
   --app-bg: var(--tg-theme-bg-color, #ffffff);
   --app-surface: var(--tg-theme-secondary-bg-color, #f2f3f5);
   --app-surface-blur: rgba(255, 255, 255, 0.72);
-  --app-card: rgba(0, 0, 0, 0.05);
   --app-elevate: rgba(0, 0, 0, 0.05);
   --app-elevate-strong: rgba(0, 0, 0, 0.09);
   --app-elevate-active: rgba(0, 0, 0, 0.08);
@@ -281,9 +279,8 @@
   padding: 0 14px;
   min-width: 90px;
   background: var(--app-surface-blur);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--app-border);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   border-radius: 100px;
   cursor: pointer;
   font-size: 14px;
@@ -356,8 +353,9 @@
   align-items: center;
   gap: 7px;
   padding: 3px 12px 3px 3px;
-  background: var(--app-surface);
-  border: 1px solid var(--app-border);
+  background: var(--app-surface-blur);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   border-radius: 999px;
 }
 .brand-avatar {
@@ -641,7 +639,7 @@
   min-width: 0;
   padding: 8px;
   border-radius: 18px;
-  background: var(--app-card);
+  background: var(--app-elevate);
   color: var(--app-text);
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
 }
