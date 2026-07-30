@@ -1345,13 +1345,14 @@
 .gd-pattern {
   position: absolute;
   inset: 0;
-  -webkit-mask-repeat: repeat;
-  mask-repeat: repeat;
-  -webkit-mask-size: 46px;
-  mask-size: 46px;
-  -webkit-mask-position: center;
-  mask-position: center;
-  opacity: 0.22;
+  /* Два слоя со смещением — шахматный (staggered) узор, как в Telegram. */
+  -webkit-mask-repeat: repeat, repeat;
+  mask-repeat: repeat, repeat;
+  -webkit-mask-size: 60px, 60px;
+  mask-size: 60px, 60px;
+  -webkit-mask-position: 0 0, 30px 30px;
+  mask-position: 0 0, 30px 30px;
+  opacity: 0.2;
   pointer-events: none;
 }
 .gd-card__actions {

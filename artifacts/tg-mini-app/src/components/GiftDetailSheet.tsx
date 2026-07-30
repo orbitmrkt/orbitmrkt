@@ -88,8 +88,8 @@ export function GiftDetailSheet() {
                 <div
                   className="gd-pattern"
                   style={{
-                    WebkitMaskImage: `url("${d.symbolPng}")`,
-                    maskImage: `url("${d.symbolPng}")`,
+                    WebkitMaskImage: `url("${d.symbolPng}"), url("${d.symbolPng}")`,
+                    maskImage: `url("${d.symbolPng}"), url("${d.symbolPng}")`,
                     backgroundColor: c.patternColor,
                   }}
                 />
