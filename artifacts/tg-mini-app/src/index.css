@@ -265,7 +265,7 @@
 
 .trw-root {
   position: fixed;
-  top: 98px;
+  top: calc(var(--tg-content-top, 98px) + 6px);
   right: 16px;
   display: flex;
   flex-direction: row;
@@ -354,7 +354,7 @@
   right: 0;
   z-index: 20;
   padding-top: 50px;
-  padding-bottom: 26px;
+  padding-bottom: 44px;
   background: var(--app-header-bg);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
@@ -393,7 +393,7 @@
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
-  padding: 164px 14px 100px;
+  padding: 182px 14px 100px;
 }
 
 /* ─── Market search bar ──────────────────────────────────────────────── */

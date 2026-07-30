@@ -20,6 +20,15 @@
   `orbitmrkt.vercel.app` = HTTP 200.
 - **Header чуть выше.** `.main-header` `padding-bottom` 12→26px, `.main-content`
   `padding-top` 150→164px (синхронно, без прыжка контента). Только `index.css`, build ок.
+- **Header ещё выше + адаптивная позиция баланса под safe-area Telegram.** (A) `.main-header`
+  `padding-bottom` 26→44px, `.main-content` `padding-top` 164→182px. (B) Кнопка баланса
+  больше не хардкодом `top:98px`: новый `src/lib/insets.ts` — `useTelegramInsets()` +
+  чистая `applyInsets()`, читают `safeAreaInset.top`+`contentSafeAreaInset.top` (Bot API 8.0),
+  пишут `--tg-content-top` на `<html>`, слушают `safeAreaChanged`/`contentSafeAreaChanged`.
+  Хук подключён в `App.tsx`. `.trw-root top` → `calc(var(--tg-content-top, 98px) + 6px)`
+  (фолбэк 98px в браузере) — баланс садится впритык под шапку ТГ на любом соотношении
+  экрана (1260×2800 и пр.), без костыля-медиазапроса. Тесты `insets.test.ts` (5) —
+  всего vitest 30/30, build ок. Файлы: `lib/insets.ts`(+тест), `App.tsx`, `index.css`.
 - **Фикс «плавающего» баланса при скролле + прозрачнее док.** (1) Экран переведён на
   паттерн внутреннего скролл-контейнера: `.main-screen` → `height:100dvh; overflow:hidden`
   (убран `padding-bottom:79px`), скролл ушёл внутрь `.main-content` (`min-height:0;

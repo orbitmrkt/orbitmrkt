@@ -8,6 +8,7 @@ import myGiftData from './assets/my-gift-icon.json';
 import profileData from './assets/profile-icon.json';
 import { isInTelegram } from './lib/telegram';
 import { useTelegramTheme } from './lib/theme';
+import { useTelegramInsets } from './lib/insets';
 import BrowserGate from './components/BrowserGate';
 
 /* ─── Telegram setup ──────────────────────────────────────────────────── */
@@ -366,6 +367,7 @@ export default function App() {
   const inTelegram = isInTelegram();
   useTelegramSetup();
   useTelegramTheme();
+  useTelegramInsets();
   const [loaded, setLoaded] = useState(false);
 
   if (GATE_ENABLED && !inTelegram) return <BrowserGate />;
