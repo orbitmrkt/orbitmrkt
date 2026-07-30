@@ -358,6 +358,8 @@
   background: var(--app-header-bg);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
 }
 
 .brand-pill {
