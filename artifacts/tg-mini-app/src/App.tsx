@@ -370,9 +370,9 @@ function MainScreen() {
 
 /* ─── Root ────────────────────────────────────────────────────────────── */
 
-// ВРЕМЕННО на период разработки и тестов: проверка initData (403-гейт) отключена,
-// чтобы приложение открывалось в обычном браузере. Вернуть защиту — GATE_ENABLED = true.
-const GATE_ENABLED: boolean = false;
+// 403-гейт: вход только из Telegram. Отключить на период разработки — GATE_ENABLED = false
+// (тогда приложение открывается и в обычном браузере).
+const GATE_ENABLED: boolean = true;
 
 export default function App() {
   const inTelegram = isInTelegram();

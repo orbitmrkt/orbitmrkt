@@ -48,6 +48,8 @@
   `GramIcon`→`DiamondIcon`. `GramIcon` остался для карточек маркета. Стили `.cart-fab__coin`/
   `.trw-coin`, `.cart-fab__sum`→inline-flex. Файлы: `icons.tsx`, `App.tsx`, `CartButton.tsx`,
   `CartSheet.tsx`, `index.css`. vitest 72/72, build ок. Push + deploy.
+- **Включён обратно 403-гейт.** `GATE_ENABLED` в `App.tsx` `false→true` (по просьбе) — вход
+  только из Telegram, в браузере снова показывается `BrowserGate` (403). build ок. Push + deploy.
 
 - **Фростед-header + адаптивные лого/баланс + чуть светлее док.** (1) `.main-header`
   переведён в фиксированный полупрозрачный бар на всю ширину (`position:fixed; top:0`,
