@@ -29,6 +29,8 @@
   (фолбэк 98px в браузере) — баланс садится впритык под шапку ТГ на любом соотношении
   экрана (1260×2800 и пр.), без костыля-медиазапроса. Тесты `insets.test.ts` (5) —
   всего vitest 30/30, build ок. Файлы: `lib/insets.ts`(+тест), `App.tsx`, `index.css`.
+- **Header выше (итерация).** `.main-header padding-bottom` 44→70px, `.main-content
+  padding-top` 182→208px. Только `index.css`, build ок. Push + vercel prod deploy.
 - **Фикс «плавающего» баланса при скролле + прозрачнее док.** (1) Экран переведён на
   паттерн внутреннего скролл-контейнера: `.main-screen` → `height:100dvh; overflow:hidden`
   (убран `padding-bottom:79px`), скролл ушёл внутрь `.main-content` (`min-height:0;
