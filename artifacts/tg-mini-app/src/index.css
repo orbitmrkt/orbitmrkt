@@ -843,18 +843,34 @@
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: transform 0.15s ease;
-  animation: cart-fab-in 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  animation: cart-fab-in 0.34s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @keyframes cart-fab-in {
   from {
     opacity: 0;
-    transform: translateY(16px) scale(0.85);
+    transform: translateX(calc(100% + 24px));
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(0);
   }
+}
+
+@keyframes cart-fab-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(calc(100% + 24px));
+  }
+}
+
+.cart-fab.is-leaving {
+  animation: cart-fab-out 0.28s cubic-bezier(0.4, 0, 1, 1) forwards;
+  pointer-events: none;
 }
 
 .cart-fab:active {
@@ -902,6 +918,8 @@
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   opacity: 0;
   transition: opacity 0.25s ease;
 }
@@ -916,7 +934,7 @@
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
-  max-height: 74vh;
+  height: 60dvh;
   display: flex;
   flex-direction: column;
   background: var(--app-bg);
@@ -958,6 +976,8 @@
 .cart-sheet__list {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
   gap: 10px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
