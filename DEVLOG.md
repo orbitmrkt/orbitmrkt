@@ -4,6 +4,13 @@
 
 ## 2026-07-30
 
+- **Окно подарка — этап 1: реальные атрибуты NFT (без MTProto).** Слаг = `{collection}-{number}`
+  (уже есть в гифтах). `api/nft.ts` (Vercel-прокси): fetch `t.me/nft/<slug>` (обход CORS Telegram),
+  отдаёт `{table, ogImage}` (фрагмент `tgme_gift_table` + превью), только формат `^[A-Za-z0-9]+-\d+$`
+  (анти-SSRF), кэш 300с. Чистый парсер `lib/nftAttrs.ts` (`parseNftAttributes` HTML-таблицы →
+  model/backdrop/symbol{name,rarity}+quantity; `giftSlug`) + 6 тестов на реальном HTML-фрагменте
+  (`t.me/nft/PlushPepe-1` → Model Pumpkin 3% / Backdrop Onyx Black 2% / Symbol Illuminati 0.5%).
+  vitest 88/88, build ок. Дальше: этап 2 — рендер модели/фона/узора из changes.tg (+кредит @GiftChanges).
 - **Корзина: кнопки выбора/удаления как чипы.** `.cart-selbar__all`/`__del` из голого текста
   (переносился на 2 строки) → компактные чипы: фон `color-mix` (accent / красный #ff5a57),
   `border-radius:999px`, `white-space:nowrap`, `:active` scale, disabled-фон `--app-elevate`.
