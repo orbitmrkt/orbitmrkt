@@ -9,6 +9,7 @@ import profileData from './assets/profile-icon.json';
 import { isInTelegram } from './lib/telegram';
 import { useTelegramTheme } from './lib/theme';
 import { useTelegramInsets } from './lib/insets';
+import { isHeaderRevealed } from './lib/scroll';
 import BrowserGate from './components/BrowserGate';
 
 /* ─── Telegram setup ──────────────────────────────────────────────────── */
@@ -331,11 +332,12 @@ import { ProfilePage } from './pages/ProfilePage';
 
 function MainScreen() {
   const [activeTab, setActiveTab] = useState(0);
+  const [headerShown, setHeaderShown] = useState(false);
 
   return (
     <div className="main-screen">
       {/* Logo header */}
-      <div className="main-header">
+      <div className={`main-header${headerShown ? ' is-visible' : ''}`}>
         <div className="brand-pill">
           <img className="brand-avatar" src={orbitAvatar} alt="Orbit Market" />
           <span className="brand-name">Orbit Market</span>
@@ -343,7 +345,10 @@ function MainScreen() {
       </div>
 
       {/* Page content */}
-      <div className="main-content">
+      <div
+        className="main-content"
+        onScroll={(e) => setHeaderShown(isHeaderRevealed(e.currentTarget.scrollTop))}
+      >
         <TopRightWidget />
         {activeTab === 0 && <MarketPage />}
         {activeTab === 1 && <GiftsPage />}

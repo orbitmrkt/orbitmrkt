@@ -360,6 +360,13 @@
   backdrop-filter: blur(20px);
   -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
   mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.main-header.is-visible {
+  opacity: 1;
 }
 
 .brand-pill {

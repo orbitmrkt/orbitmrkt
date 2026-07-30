@@ -41,6 +41,13 @@
   фиксированный фростед-header и размывается его `backdrop-filter`, а не висит фиксированно
   поверх. Позиция под шапку ТГ сохранена (`--tg-content-top`). Файлы: `App.tsx`, `index.css`.
   vitest 30/30, build ок. Push + deploy.
+- **Header проявляется при прокрутке (reveal-on-scroll).** Вверху фростед-header скрыт
+  (`opacity:0; pointer-events:none`), плавно проявляется (`transition .25s`) при скролле
+  вниз к карточкам. Порог вынесен в тестируемый `src/lib/scroll.ts` (`isHeaderRevealed`,
+  `HEADER_REVEAL_THRESHOLD=96`; overscroll с отрицательным scrollTop → скрыт). `App.tsx`:
+  state `headerShown` + `onScroll` на `.main-content` → класс `.is-visible`. Тесты
+  `scroll.test.ts` (5) — всего vitest 35/35, build ок. Файлы: `lib/scroll.ts`(+тест),
+  `App.tsx`, `index.css`. Push + deploy.
 - **Фикс «плавающего» баланса при скролле + прозрачнее док.** (1) Экран переведён на
   паттерн внутреннего скролл-контейнера: `.main-screen` → `height:100dvh; overflow:hidden`
   (убран `padding-bottom:79px`), скролл ушёл внутрь `.main-content` (`min-height:0;
