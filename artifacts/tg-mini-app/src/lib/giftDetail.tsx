@@ -8,13 +8,6 @@ import {
 } from 'react';
 import type { Gift } from './mockGifts';
 import { giftSlug, parseNftAttributes, type NftAttributes } from './nftAttrs';
-import {
-  backdropsUrl,
-  findBackdrop,
-  modelLottieUrl,
-  symbolPngUrl,
-  type BackdropColors,
-} from './changesApi';
 
 /* ─── Контекст открытия окна подарка ──────────────────────────────────── */
 
@@ -58,14 +51,16 @@ export function useGiftDetail(): GiftDetailCtx {
   return c;
 }
 
-/* ─── Загрузка деталей подарка (t.me/nft + changes.tg) ────────────────── */
+/* ─── Загрузка деталей подарка ────────────────────────────────────────── */
 
 export interface GiftDetailsData {
   loading: boolean;
+  /** Атрибуты инстанса (имена + редкость) — парс t.me/nft через /api/nft. */
   attrs: NftAttributes | null;
-  colors: BackdropColors | null;
-  modelData: unknown | null;
-  symbolPng: string | null;
+  /** Полный Lottie карточки (модель+узор+фон) с fragment.com через /api/giftLottie. */
+  cardData: unknown | null;
+  /** Крупное статичное превью (fragment .large) — фолбэк пока грузится Lottie. */
+  fallbackImg: string;
   ogImage: string | null;
   name: string | null;
 }
@@ -73,16 +68,16 @@ export interface GiftDetailsData {
 const EMPTY: GiftDetailsData = {
   loading: false,
   attrs: null,
-  colors: null,
-  modelData: null,
-  symbolPng: null,
+  cardData: null,
+  fallbackImg: '',
   ogImage: null,
   name: null,
 };
 
 /**
- * По подарку тянет реальные атрибуты (через наш /api/nft, парс t.me/nft) и ассеты
- * из changes.tg: Lottie модели, PNG узора, hex-цвета фона. thanks to @GiftChanges.
+ * По подарку тянет: полный Lottie карточки (fragment, слои модель+узор+фон —
+ * аутентичный рендер Telegram) и атрибуты (t.me/nft: имена + редкость). Оба
+ * запроса параллельно, через наши /api-прокси (обход CORS).
  */
 export function useGiftDetails(gift: Gift | null): GiftDetailsData {
   const [data, setData] = useState<GiftDetailsData>(EMPTY);
@@ -90,56 +85,33 @@ export function useGiftDetails(gift: Gift | null): GiftDetailsData {
   useEffect(() => {
     if (!gift) return;
     let cancelled = false;
-    setData({ ...EMPTY, loading: true });
+    const slug = giftSlug(gift.collection, gift.number);
+    const fallbackImg = `https://nft.fragment.com/gift/${slug}.large.jpg`;
+    setData({ ...EMPTY, loading: true, fallbackImg });
 
-    (async () => {
-      try {
-        const slug = giftSlug(gift.collection, gift.number);
-        const r = await fetch(`/api/nft?slug=${encodeURIComponent(slug)}`);
-        const j = (await r.json()) as {
-          table?: string;
-          ogImage?: string | null;
-          ogTitle?: string | null;
-        };
-        if (cancelled) return;
-        const attrs = parseNftAttributes(j.table ?? '');
-        setData((d) => ({
-          ...d,
-          attrs,
-          ogImage: j.ogImage ?? null,
-          name: j.ogTitle ?? gift.name,
-          symbolPng: attrs.symbol
-            ? symbolPngUrl(gift.collection, attrs.symbol.name)
-            : null,
-        }));
+    const attrsP = fetch(`/api/nft?slug=${encodeURIComponent(slug)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null);
+    const cardP = fetch(`/api/giftLottie?slug=${encodeURIComponent(slug)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null);
 
-        if (attrs.backdrop) {
-          try {
-            const br = await fetch(backdropsUrl(gift.collection));
-            const list = await br.json();
-            if (!cancelled) {
-              setData((d) => ({ ...d, colors: findBackdrop(list, attrs.backdrop!.name) }));
-            }
-          } catch {
-            /* цвета фона недоступны — рендерим без градиента */
-          }
-        }
-
-        if (attrs.model) {
-          try {
-            const mr = await fetch(modelLottieUrl(gift.collection, attrs.model.name));
-            const mj = await mr.json();
-            if (!cancelled) setData((d) => ({ ...d, modelData: mj }));
-          } catch {
-            /* Lottie модели недоступна — покажем превью */
-          }
-        }
-      } catch {
-        /* сеть/прокси недоступны */
-      } finally {
-        if (!cancelled) setData((d) => ({ ...d, loading: false }));
-      }
-    })();
+    Promise.all([attrsP, cardP]).then(([j, card]) => {
+      if (cancelled) return;
+      const meta = j as {
+        table?: string;
+        ogImage?: string | null;
+        ogTitle?: string | null;
+      } | null;
+      setData({
+        loading: false,
+        attrs: meta ? parseNftAttributes(meta.table ?? '') : null,
+        cardData: card ?? null,
+        fallbackImg,
+        ogImage: meta?.ogImage ?? null,
+        name: meta?.ogTitle ?? gift.name,
+      });
+    });
 
     return () => {
       cancelled = true;

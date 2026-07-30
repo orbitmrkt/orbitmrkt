@@ -9,23 +9,6 @@ import { formatGram } from '../lib/cartMath';
 import { hapticSelection, hapticImpact } from '../lib/haptics';
 import { DiamondIcon } from './icons';
 
-// Радиальный узор: символы кольцами вокруг центра (центр под моделью — чистый),
-// затухают к краям. Позиции — в процентах карточки (масштабируются).
-const PATTERN_RINGS = [
-  { r: 0.359, n: 7, size: 0.088, op: 0.4 },
-  { r: 0.488, n: 10, size: 0.082, op: 0.28 },
-  { r: 0.612, n: 11, size: 0.076, op: 0.18 },
-];
-const PATTERN_DOTS = PATTERN_RINGS.flatMap((ring) =>
-  Array.from({ length: ring.n }, (_, i) => {
-    const a = (i / ring.n) * Math.PI * 2 + ring.r * 3;
-    const cx = 50 + Math.cos(a) * ring.r * 100;
-    const cy = 50 + Math.sin(a) * ring.r * 100;
-    const s = ring.size * 100;
-    return { left: cx - s / 2, top: cy - s / 2, size: s, op: ring.op };
-  }),
-);
-
 function openTgLink(url: string) {
   try {
     const tg = (
@@ -84,7 +67,6 @@ export function GiftDetailSheet() {
   const { gift, open, close } = useGiftDetail();
   const d: GiftDetailsData = useGiftDetails(gift);
   const slug = gift ? giftSlug(gift.collection, gift.number) : '';
-  const c = d.colors;
 
   return (
     <div className={`gd-root${open ? ' is-open' : ''}`} aria-hidden={!open}>
@@ -93,33 +75,17 @@ export function GiftDetailSheet() {
         <div className="gd-handle" />
         {gift && (
           <>
-            <div
-              className="gd-card"
-              style={
-                c
-                  ? { background: `radial-gradient(circle at 50% 38%, ${c.centerColor}, ${c.edgeColor})` }
-                  : undefined
-              }
-            >
-              {d.symbolPng && c && (
-                <div className="gd-pattern-fade">
-                  {PATTERN_DOTS.map((p, i) => (
-                    <div
-                      key={i}
-                      className="gd-pdot"
-                      style={{
-                        left: `${p.left}%`,
-                        top: `${p.top}%`,
-                        width: `${p.size}%`,
-                        height: `${p.size}%`,
-                        opacity: p.op,
-                        WebkitMaskImage: `url("${d.symbolPng}")`,
-                        maskImage: `url("${d.symbolPng}")`,
-                        backgroundColor: c.patternColor,
-                      }}
-                    />
-                  ))}
+            <div className="gd-card">
+              {d.cardData ? (
+                <div className="gd-cardlottie">
+                  <Lottie animationData={d.cardData as object} loop autoplay />
                 </div>
+              ) : (
+                <img
+                  className="gd-card__cover"
+                  src={d.ogImage ?? (d.fallbackImg || gift.image)}
+                  alt={gift.name}
+                />
               )}
               <div className="gd-card__actions">
                 <button
@@ -149,18 +115,7 @@ export function GiftDetailSheet() {
                   <ShareIcon />
                 </button>
               </div>
-              {d.modelData ? (
-                <div className="gd-model">
-                  <Lottie animationData={d.modelData as object} loop autoplay />
-                </div>
-              ) : (
-                <img
-                  className="gd-card__cover"
-                  src={d.ogImage ?? gift.image}
-                  alt={gift.name}
-                />
-              )}
-              <div className="gd-card__title" style={c ? { color: c.textColor } : undefined}>
+              <div className="gd-card__title">
                 <span className="gd-name">{d.name ?? gift.name}</span>
                 <span className="gd-number">#{gift.number}</span>
               </div>
@@ -203,8 +158,6 @@ export function GiftDetailSheet() {
                 </span>
               </button>
             </div>
-
-            <div className="gd-credit">data · @GiftChanges</div>
           </>
         )}
       </div>

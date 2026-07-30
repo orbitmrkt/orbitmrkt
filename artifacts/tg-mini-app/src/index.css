@@ -1342,24 +1342,16 @@
   justify-content: center;
   flex-shrink: 0;
 }
-/* Радиальное затухание узора к краям (виньетка), как в Telegram. */
-.gd-pattern-fade {
+/* Полноразмерная Lottie-карточка (модель+узор+фон с fragment.com — аутентичный Telegram-рендер). */
+.gd-cardlottie {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  -webkit-mask-image: radial-gradient(circle at 50% 46%, #000 55%, rgba(0, 0, 0, 0.4) 78%, transparent 100%);
-  mask-image: radial-gradient(circle at 50% 46%, #000 55%, rgba(0, 0, 0, 0.4) 78%, transparent 100%);
+  z-index: 0;
 }
-/* Один символ узора (позиционируется в проценте карточки). */
-.gd-pdot {
-  position: absolute;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  pointer-events: none;
+.gd-cardlottie svg,
+.gd-cardlottie > div {
+  width: 100% !important;
+  height: 100% !important;
 }
 .gd-card__actions {
   position: absolute;
@@ -1392,22 +1384,6 @@
   width: 20px;
   height: 20px;
 }
-.gd-model {
-  position: relative;
-  z-index: 1;
-  width: 66%;
-  height: 66%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 8%;
-}
-.gd-model svg,
-.gd-model img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
 .gd-card__title {
   position: absolute;
   left: 0;
@@ -1416,6 +1392,7 @@
   z-index: 2;
   text-align: center;
   color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
 }
 .gd-name {
   display: block;
@@ -1524,13 +1501,6 @@
 .gd-buy {
   background: var(--app-accent);
   color: var(--tg-theme-button-text-color, #fff);
-}
-.gd-credit {
-  text-align: center;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--app-text-faint);
-  padding-top: 2px;
 }
 
 /* Полноразмерный фолбэк-превью карточки (пока грузится Lottie модели) */

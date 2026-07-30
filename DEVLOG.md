@@ -4,6 +4,15 @@
 
 ## 2026-07-30
 
+- **Окно подарка — рефактор на fragment-Lottie (аутентичный рендер, узор решён).** Находка:
+  `nft.fragment.com/gift/<slug>.lottie.json` — ВСЯ карточка одним Lottie (слои Gift+Pattern+
+  Background), т.е. реальный узор/фон/модель Telegram (тот самый, что вручную не давался).
+  Новый прокси `api/giftLottie.ts` (CORS у fragment закрыт; анти-SSRF, кэш сутки). `useGiftDetails`
+  переписан: параллельно `/api/nft` (атрибуты: имена+редкость) + `/api/giftLottie` (карточка).
+  `GiftDetailSheet`: карточка = полноразмерный Lottie (fallback — fragment `.large` 640px cover),
+  убраны ручной градиент/узор(dots)/`.gd-model`. changes.tg БОЛЬШЕ НЕ ИСПОЛЬЗУЕТСЯ → удалены
+  `lib/changesApi.ts`(+тест), убран кредит `@GiftChanges` (условие снято). Заголовок — white + shadow.
+  vitest 88/88 (было 94, −6 удалённых changesApi), build ок. Провалидировано рендером fragment-lottie.
 - **Окно подарка — этап 2: рендер модели/фона/узора (changes.tg) + окно.** `api/nft.ts` теперь
   отдаёт и `ogTitle`. `lib/changesApi.ts`(+тест): URL-билдеры model/symbol/backdrops + `findBackdrop`
   (по имени → hex). `lib/giftDetail.tsx`: `GiftDetailProvider`/`useGiftDetail` (open/close с задержкой
