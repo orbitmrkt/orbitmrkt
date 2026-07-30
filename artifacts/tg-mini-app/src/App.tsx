@@ -333,9 +333,12 @@ function MainScreen() {
 
   return (
     <div className="main-screen">
-      <TopRightWidget />
+      {/* Sticky header — keeps the balance pinned (no fixed-position jitter) */}
+      <header className="app-header">
+        <TopRightWidget />
+      </header>
 
-      {/* Logo header */}
+      {/* Logo — scrolls with content, centered */}
       <div className="main-header">
         <div className="brand-pill">
           <img className="brand-avatar" src={orbitAvatar} alt="Orbit Market" />
