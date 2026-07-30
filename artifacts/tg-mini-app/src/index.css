@@ -1039,6 +1039,16 @@
   padding: 8px;
   border-radius: 16px;
   background: var(--app-surface);
+  border: 1.5px solid transparent;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.15s ease;
+}
+.cart-item.is-selected {
+  border-color: var(--app-accent);
 }
 .cart-item__img {
   width: 52px;
@@ -1083,24 +1093,94 @@
   width: 100%;
   height: 100%;
 }
-.cart-item__remove {
+.cart-check {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  border: none;
+  width: 22px;
+  height: 22px;
   border-radius: 999px;
-  background: var(--app-elevate);
-  color: var(--app-text-muted);
-  font-size: 20px;
-  line-height: 1;
-  cursor: pointer;
+  border: 2px solid var(--app-border);
+  color: transparent;
   flex-shrink: 0;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.cart-check.is-on {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  color: var(--tg-theme-button-text-color, #fff);
+}
+.cart-check svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Верхняя панель: выбрать все / удалить выбранное */
+.cart-selbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 2px 4px 10px;
+}
+.cart-selbar__all,
+.cart-selbar__del {
+  border: none;
+  background: none;
+  padding: 4px 2px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.cart-item__remove:active {
-  background: var(--app-elevate-active);
+.cart-selbar__all {
+  color: var(--app-accent);
+}
+.cart-selbar__del {
+  color: var(--app-destructive, #e0524f);
+}
+.cart-selbar__del:disabled {
+  color: var(--app-text-faint);
+  cursor: default;
+}
+
+/* Кнопка «Купить» */
+.cart-buy {
+  margin-top: 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  background: var(--app-accent);
+  color: var(--tg-theme-button-text-color, #fff);
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+.cart-buy:active {
+  transform: scale(0.98);
+}
+.cart-buy.is-dim {
+  background: color-mix(in srgb, var(--app-accent) 34%, var(--app-surface));
+  color: var(--app-text-muted);
+}
+.cart-buy__coin {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+}
+.cart-buy__coin svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* ─── Profile ────────────────────────────────────────────────────────── */

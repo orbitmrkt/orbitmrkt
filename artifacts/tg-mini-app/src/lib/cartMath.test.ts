@@ -6,6 +6,9 @@ import {
   addItem,
   removeItem,
   toggleItem,
+  selectedItems,
+  selectedTotal,
+  isAllSelected,
 } from './cartMath';
 import type { Gift } from './mockGifts';
 
@@ -82,5 +85,32 @@ describe('toggleItem', () => {
   });
   it('убирает, если есть', () => {
     expect(toggleItem([g('a', 1)], g('a', 1))).toHaveLength(0);
+  });
+});
+
+describe('выбор товаров', () => {
+  const its = [g('a', 10), g('b', 5), g('c', 2.5)];
+
+  it('ничего не снято → выбраны все', () => {
+    expect(selectedItems(its, new Set())).toHaveLength(3);
+    expect(selectedTotal(its, new Set())).toBe(17.5);
+    expect(isAllSelected(its, new Set())).toBe(true);
+  });
+  it('часть снята', () => {
+    const d = new Set(['b']);
+    expect(selectedItems(its, d)).toHaveLength(2);
+    expect(selectedTotal(its, d)).toBe(12.5);
+    expect(isAllSelected(its, d)).toBe(false);
+  });
+  it('сняты все → сумма 0, isAllSelected false', () => {
+    const d = new Set(['a', 'b', 'c']);
+    expect(selectedTotal(its, d)).toBe(0);
+    expect(isAllSelected(its, d)).toBe(false);
+  });
+  it('пустая корзина → isAllSelected false', () => {
+    expect(isAllSelected([], new Set())).toBe(false);
+  });
+  it('лишний id в deselected не ломает сумму', () => {
+    expect(selectedTotal(its, new Set(['zzz']))).toBe(17.5);
   });
 });

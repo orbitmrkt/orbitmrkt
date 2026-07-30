@@ -4,6 +4,16 @@
 
 ## 2026-07-30
 
+- **Корзина: выбор товаров + кнопка «Купить».** В `CartSheet` добавлен выбор (модель
+  «снятые id» → новые по умолчанию выбраны): у товаров чекбокс `.cart-check`, вся строка —
+  тогл выбора, выбранные с обводкой `.cart-item.is-selected` (border accent). Сверху панель
+  `.cart-selbar`: «Выбрать все»/«Снять выделение» (тогл) + «Удалить выбранное · N»
+  (destructive, disabled при 0). Снизу `.cart-buy` «Купить за {сумма выбранных} 💎»
+  (адаптивная, `--app-accent`; `.is-dim` — темнее при нехватке баланса/пустом выборе;
+  BALANCE=0 мок; пока только haptic, платёж — отдельной фазой). Одиночный × убран (удаление
+  через выбор). Чистые функции `selectedItems`/`selectedTotal`/`isAllSelected` в `cartMath.ts`
+  (+5 тестов). Файлы: `CartSheet.tsx`, `cartMath.ts`(+тест), `index.css`. vitest 82/82, build ок.
+  Push + deploy.
 - **Профиль выше + лого-пилюля: анимация + кнопка-ссылка на бота.** (1) `.profile-page`
   `margin-top:-84px` — шапка профиля (аватар/имя/@юз) поднята выше. (2) Лого-пилюля
   `.brand-pill` из `<div>` → `<button>` с `openBot()` → `tg.openTelegramLink('https://t.me/OrbitMrktBot')`

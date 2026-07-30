@@ -38,3 +38,27 @@ export function toggleItem(items: Gift[], gift: Gift): Gift[] {
     ? removeItem(items, gift.id)
     : addItem(items, gift);
 }
+
+/** Товары, которые ВЫБРАНЫ (не входят в множество снятых `deselected`). */
+export function selectedItems(
+  items: Gift[],
+  deselected: ReadonlySet<string>,
+): Gift[] {
+  return items.filter((g) => !deselected.has(g.id));
+}
+
+/** Сумма выбранных товаров (округлена до 2 знаков). */
+export function selectedTotal(
+  items: Gift[],
+  deselected: ReadonlySet<string>,
+): number {
+  return cartTotal(selectedItems(items, deselected));
+}
+
+/** true, если выбраны все товары (и корзина не пуста). */
+export function isAllSelected(
+  items: Gift[],
+  deselected: ReadonlySet<string>,
+): boolean {
+  return items.length > 0 && items.every((g) => !deselected.has(g.id));
+}
