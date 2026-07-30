@@ -32,6 +32,15 @@
   стартует в том же кадре, лага/пустого кадра нет; `EXIT_MS` 280→300 под длительность анимации.
   (2) `.cart-sheet`: высота `60→74dvh`, скругление верхних углов `22→30px`; `cart-fab-out`
   0.28→0.3s. Файлы: `CartButton.tsx`, `index.css`. vitest 62/62, build ок. Push + deploy.
+- **Корзина сохраняется между заходами (Telegram CloudStorage).** По выбору justidev —
+  не localStorage, а серверный `tg.CloudStorage` (кросс-девайс, Bot API 6.9+). Новый
+  `lib/cartStorage.ts`: ключ `orbit_cart_v1`, чистые `parseStoredCart` (устойчиво к
+  null/undefined/пустой/битому JSON/не-массиву → []; отсев кривых записей строгой
+  `isValidGift`) + `serializeCart`. В `CartProvider`: загрузка через `getItem` на старте +
+  сохранение через `setItem` на изменениях, с флагом `hydrated` (useRef) — пустой старт не
+  затирает облако до загрузки; вне Telegram (нет CloudStorage) — тихий no-op. Тесты
+  `cartStorage.test.ts` (10) — всего vitest 72/72, build ок. Файлы: `lib/cartStorage.ts`(+тест),
+  `lib/cart.tsx`. Push + deploy.
 
 - **Фростед-header + адаптивные лого/баланс + чуть светлее док.** (1) `.main-header`
   переведён в фиксированный полупрозрачный бар на всю ширину (`position:fixed; top:0`,
