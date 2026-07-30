@@ -155,7 +155,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
         <Lottie
           animationData={animationData}
           loop={false}
-          style={{ width: 160, height: 160 }}
+          style={{ width: 160, height: 160, filter: 'drop-shadow(0 6px 18px rgba(0, 0, 0, 0.18))' }}
         />
       </div>
 
