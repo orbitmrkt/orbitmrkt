@@ -952,21 +952,20 @@
 }
 .cart-sheet {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
+  left: 8px;
+  right: 8px;
+  bottom: calc(var(--custom-safe-area-bottom, 20px) + 8px);
+  width: auto;
   max-width: 480px;
   margin: 0 auto;
   height: 74dvh;
   display: flex;
   flex-direction: column;
   background: var(--app-bg);
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  padding: 8px 16px calc(var(--custom-safe-area-bottom, 20px) + 16px);
+  border-radius: 30px;
+  padding: 8px 16px 16px;
   box-sizing: border-box;
-  transform: translateY(100%);
+  transform: translateY(calc(100% + var(--custom-safe-area-bottom, 20px) + 8px));
   transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
 }
 .cart-sheet-root.is-open .cart-sheet {
