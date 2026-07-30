@@ -55,6 +55,12 @@
   `filter` на `.nav-item .nav-icon-wrap`: тёмная `brightness(0) invert(1)` (белый), светлая
   `[data-theme='light']` → `brightness(0)` (чёрный). Работает и для SVG, и для Lottie.
   Только `index.css`, build ок. Push + deploy.
+- **Header меньше + адаптация экрана загрузки под тему.** (1) `.main-header padding-bottom`
+  70→40px, `.main-content padding-top` 208→168px. (2) LoadingScreen был захардкожен тёмным →
+  привязан к токенам: фон `hsl(220,13%,13%)`→`var(--app-bg)`, звёзды `white`→
+  `var(--app-text-strong)`, трек прогресс-бара `rgba(255,255,255,0.08)`→`var(--app-elevate)`,
+  лого — класс `.load-logo` с тема-зависимым `filter` (dark `brightness(0) invert(1)` /
+  light `brightness(0)`). Файлы: `App.tsx`, `index.css`. vitest 35/35, build ок. Push + deploy.
 - **Фикс «плавающего» баланса при скролле + прозрачнее док.** (1) Экран переведён на
   паттерн внутреннего скролл-контейнера: `.main-screen` → `height:100dvh; overflow:hidden`
   (убран `padding-bottom:79px`), скролл ушёл внутрь `.main-content` (`min-height:0;

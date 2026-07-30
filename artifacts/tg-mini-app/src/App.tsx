@@ -63,7 +63,7 @@ function ProgressBar({ duration }: { duration: number }) {
         width: 300,
         height: 8,
         borderRadius: 999,
-        backgroundColor: 'rgba(255,255,255,0.08)',
+        backgroundColor: 'var(--app-elevate)',
         overflow: 'hidden',
       }}
     >
@@ -104,7 +104,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
   }, [onDone]);
 
   /* ─── SVG star shape ─────────────────────────────────────────────────── */
-  const Star = ({ size, color = 'white' }: { size: number; color?: string }) => (
+  const Star = ({ size, color = 'var(--app-text-strong)' }: { size: number; color?: string }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <path
         d="M12 2 C12 2 12.8 7.5 14.5 9.5 C16.2 11.5 22 12 22 12 C22 12 16.2 12.5 14.5 14.5 C12.8 16.5 12 22 12 22 C12 22 11.2 16.5 9.5 14.5 C7.8 12.5 2 12 2 12 C2 12 7.8 11.5 9.5 9.5 C11.2 7.5 12 2 12 2 Z"
@@ -120,29 +120,29 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
         transition: `opacity ${FADE_MS}ms ease`,
         position: 'fixed',
         inset: 0,
-        background: 'hsl(220, 13%, 13%)',
+        background: 'var(--app-bg)',
       }}
     >
       {/* ── Scattered twinkling stars ─────────────────────────────────────── */}
 
       {/* Top-left */}
       <div className="sparkle sparkle-a" style={{ '--dur': '2.6s', position: 'absolute', top: '18%', left: '12%' } as React.CSSProperties}>
-        <Star size={28} color="white" />
+        <Star size={28} color="var(--app-text-strong)" />
       </div>
 
       {/* Top-right */}
       <div className="sparkle sparkle-c" style={{ '--dur': '3.1s', position: 'absolute', top: '22%', right: '14%' } as React.CSSProperties}>
-        <Star size={20} color="white" />
+        <Star size={20} color="var(--app-text-strong)" />
       </div>
 
       {/* Mid-left (below center) */}
       <div className="sparkle sparkle-b" style={{ '--dur': '2.0s', position: 'absolute', top: '58%', left: '8%' } as React.CSSProperties}>
-        <Star size={16} color="white" />
+        <Star size={16} color="var(--app-text-strong)" />
       </div>
 
       {/* Right side, near logo */}
       <div className="sparkle sparkle-a" style={{ '--dur': '3.5s', position: 'absolute', bottom: '22%', right: '10%' } as React.CSSProperties}>
-        <Star size={22} color="white" />
+        <Star size={22} color="var(--app-text-strong)" />
       </div>
 
       {/* Lottie animation — centred vertically */}
@@ -168,12 +168,12 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
         whiteSpace: 'nowrap',
       }}>
         <img
+          className="load-logo"
           src={orbitLogo}
           alt="Orbit Market"
           style={{
             width: 200,
             objectFit: 'contain',
-            filter: 'brightness(0) invert(1)',
             opacity: 0.9,
           }}
         />

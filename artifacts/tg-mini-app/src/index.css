@@ -171,6 +171,13 @@
 .sparkle-b { animation: twinkle-b var(--dur, 1.9s) ease-in-out infinite; }
 .sparkle-c { animation: twinkle-c var(--dur, 2.8s) ease-in-out infinite; }
 
+.load-logo {
+  filter: brightness(0) invert(1);
+}
+[data-theme='light'] .load-logo {
+  filter: brightness(0);
+}
+
 /* ── Bottom navbar ───────────────────────────────────────────────────── */
 
 .nav-bar-wrapper {
@@ -359,7 +366,7 @@
   right: 0;
   z-index: 20;
   padding-top: 50px;
-  padding-bottom: 70px;
+  padding-bottom: 40px;
   pointer-events: none;
 }
 
@@ -416,7 +423,7 @@
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
-  padding: 208px 14px 100px;
+  padding: 168px 14px 100px;
 }
 
 /* ─── Market search bar ──────────────────────────────────────────────── */
