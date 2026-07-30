@@ -27,6 +27,11 @@
   (3) Поп-ап открывается на `height: 60dvh` (было content-height/max 74vh); `.cart-sheet__list`
   получил `flex:1; min-height:0` для скролла внутри фикс-высоты. Файлы: `CartButton.tsx`,
   `index.css`. vitest 62/62, build ок. Push + deploy.
+- **Корзина: фикс лага ухода + круглее/выше окно.** (1) `CartButton.tsx`: `leaving` теперь
+  вычисляется СИНХРОННО в рендере (`rendered && count===0`), а не в useEffect — exit-анимация
+  стартует в том же кадре, лага/пустого кадра нет; `EXIT_MS` 280→300 под длительность анимации.
+  (2) `.cart-sheet`: высота `60→74dvh`, скругление верхних углов `22→30px`; `cart-fab-out`
+  0.28→0.3s. Файлы: `CartButton.tsx`, `index.css`. vitest 62/62, build ок. Push + deploy.
 
 - **Фростед-header + адаптивные лого/баланс + чуть светлее док.** (1) `.main-header`
   переведён в фиксированный полупрозрачный бар на всю ширину (`position:fixed; top:0`,

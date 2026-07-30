@@ -4,36 +4,37 @@ import { formatGram, pluralizeGifts } from '../lib/cartMath';
 import { hapticImpact } from '../lib/haptics';
 import { BasketIcon } from './icons';
 
-const EXIT_MS = 280;
+// Должно совпадать с длительностью анимации cart-fab-out в index.css.
+const EXIT_MS = 300;
 
 export function CartButton({ onOpen }: { onOpen: () => void }) {
   const { count, total } = useCart();
-  const [mounted, setMounted] = useState(count > 0);
-  const [leaving, setLeaving] = useState(false);
+  const [rendered, setRendered] = useState(count > 0);
   // Снимок последних ненулевых значений — чтобы во время ухода не мигал «0».
   const [snap, setSnap] = useState({ count, total });
 
+  // Появился товар — показываем и запоминаем актуальные значения.
   useEffect(() => {
     if (count > 0) {
+      setRendered(true);
       setSnap({ count, total });
-      setMounted(true);
-      setLeaving(false);
-      return;
     }
-    if (mounted) {
-      setLeaving(true);
-      const t = setTimeout(() => {
-        setMounted(false);
-        setLeaving(false);
-      }, EXIT_MS);
-      return () => clearTimeout(t);
-    }
-  }, [count, total, mounted]);
+  }, [count, total]);
 
-  if (!mounted) return null;
+  // Уход вычисляется синхронно в рендере: анимация стартует в том же кадре.
+  const leaving = rendered && count === 0;
 
-  const shownCount = leaving ? snap.count : count;
-  const shownTotal = leaving ? snap.total : total;
+  // По завершении exit-анимации — размонтируем.
+  useEffect(() => {
+    if (!leaving) return;
+    const t = setTimeout(() => setRendered(false), EXIT_MS);
+    return () => clearTimeout(t);
+  }, [leaving]);
+
+  if (!rendered) return null;
+
+  const shownCount = count > 0 ? count : snap.count;
+  const shownTotal = count > 0 ? total : snap.total;
 
   return (
     <button
