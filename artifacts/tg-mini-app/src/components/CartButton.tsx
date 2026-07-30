@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useCart } from '../lib/cart';
 import { formatGram, pluralizeGifts } from '../lib/cartMath';
 import { hapticImpact } from '../lib/haptics';
-import { BasketIcon } from './icons';
+import { BasketIcon, DiamondIcon } from './icons';
 
 // Должно совпадать с длительностью анимации cart-fab-out в index.css.
 const EXIT_MS = 300;
@@ -50,7 +50,12 @@ export function CartButton({ onOpen }: { onOpen: () => void }) {
         <BasketIcon />
       </span>
       <span className="cart-fab__text">
-        <span className="cart-fab__sum">{formatGram(shownTotal)} GRAM</span>
+        <span className="cart-fab__sum">
+          {formatGram(shownTotal)}
+          <span className="cart-fab__coin">
+            <DiamondIcon />
+          </span>
+        </span>
         <span className="cart-fab__count">
           {shownCount} {pluralizeGifts(shownCount)}
         </span>

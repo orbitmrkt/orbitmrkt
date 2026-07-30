@@ -41,6 +41,13 @@
   затирает облако до загрузки; вне Telegram (нет CloudStorage) — тихий no-op. Тесты
   `cartStorage.test.ts` (10) — всего vitest 72/72, build ок. Файлы: `lib/cartStorage.ts`(+тест),
   `lib/cart.tsx`. Push + deploy.
+- **Иконка-алмаз баланса в корзине (вместо «GRAM»/GramIcon).** Coin-svg из баланса вынесен
+  в общий `DiamondIcon` (`components/icons.tsx`), баланс (`App.tsx` TopRightWidget) переведён
+  на него (`<span class="trw-icon-blue trw-coin"><DiamondIcon/>`). В кнопке корзины убран текст
+  «GRAM» → добавлена иконка `.cart-fab__coin` (accent). В поп-апе корзины иконка цены
+  `GramIcon`→`DiamondIcon`. `GramIcon` остался для карточек маркета. Стили `.cart-fab__coin`/
+  `.trw-coin`, `.cart-fab__sum`→inline-flex. Файлы: `icons.tsx`, `App.tsx`, `CartButton.tsx`,
+  `CartSheet.tsx`, `index.css`. vitest 72/72, build ок. Push + deploy.
 
 - **Фростед-header + адаптивные лого/баланс + чуть светлее док.** (1) `.main-header`
   переведён в фиксированный полупрозрачный бар на всю ширину (`position:fixed; top:0`,

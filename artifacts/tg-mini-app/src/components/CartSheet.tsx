@@ -1,7 +1,7 @@
 import { useCart } from '../lib/cart';
 import { formatGram, pluralizeGifts } from '../lib/cartMath';
 import { hapticSelection } from '../lib/haptics';
-import { GramIcon } from './icons';
+import { DiamondIcon } from './icons';
 
 export function CartSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { items, total, count, remove } = useCart();
@@ -36,7 +36,7 @@ export function CartSheet({ open, onClose }: { open: boolean; onClose: () => voi
                 </div>
                 <span className="cart-item__price">
                   <span className="cart-item__price-icon">
-                    <GramIcon />
+                    <DiamondIcon />
                   </span>
                   {gift.price}
                 </span>
