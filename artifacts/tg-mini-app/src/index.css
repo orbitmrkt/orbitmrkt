@@ -702,8 +702,8 @@
   padding: 0 6px;
   border-radius: 9px;
   border: none;
-  background: var(--gift-accent, var(--app-accent));
-  color: #fff;
+  background: var(--app-accent);
+  color: var(--tg-theme-button-text-color, #fff);
   font-size: 12px;
   font-weight: 600;
   font-family: inherit;
@@ -757,7 +757,7 @@
   transform: scale(0.94);
 }
 .gift-card__basket.is-in {
-  background: var(--gift-accent, var(--app-accent));
+  background: var(--app-accent);
   border-color: transparent;
-  color: #fff;
+  color: var(--tg-theme-button-text-color, #fff);
 }

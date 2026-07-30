@@ -5,6 +5,7 @@ export interface Gift {
   number: number;
   image: string;
   price: number;
+  /** Цвет модели — зарезервирован под фазу 2 (glow/узоры карточки). */
   accent: string;
 }
 

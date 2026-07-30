@@ -42,10 +42,7 @@ export function GiftCard({ gift }: { gift: Gift }) {
   const [inBasket, setInBasket] = useState(false);
 
   return (
-    <div
-      className="gift-card"
-      style={{ ['--gift-accent' as string]: gift.accent } as React.CSSProperties}
-    >
+    <div className="gift-card">
       <button
         type="button"
         className="gift-card__media"
