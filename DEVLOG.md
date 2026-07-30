@@ -66,3 +66,4 @@
 
 
 - **Favicon.** Из `IMG_9544.PNG` (аватар) сгенерированы `public/favicon.png` (192) и `public/apple-touch-icon.png` (180); в `index.html` ссылка `favicon.svg` → `favicon.png` + apple-touch. Build ок, деплой (Vercel CLI) 200, отдаётся `image/png`.
+- **Карточки товаров (фаза 1 — рандом).** `src/lib/mockGifts.ts` — генератор `randomGifts(n)` из выверенного пула 25 реальных гифтов (картинки `nft.fragment.com`, все 200), рандом цена GRAM [0.5..250]. `src/components/GiftCard.tsx` — карточка по макету из `gift-card-export.zip` (фото → имя → `#номер · Minted` → price-pill с GRAM-иконкой + кнопка корзины), на токенах темы + per-card акцент `--gift-accent`; корзина = рабочий toggle, тапы = haptic. `src/lib/haptics.ts` — общий хук. Сетка `.gift-grid` в `MarketPage` (`repeat(auto-fill, minmax(104px,1fr))` → 3–4 в ряд), 24 карточки. Тесты `mockGifts.test.ts` (5) — всего 25 зелёных. typecheck 0, build ок. Фаза 2 (позже): парсинг моделей по ссылке → фон/узоры/Lottie.
