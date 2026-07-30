@@ -4,6 +4,18 @@
 
 ## 2026-07-30
 
+- **Фростед-header + адаптивные лого/баланс + чуть светлее док.** (1) `.main-header`
+  переведён в фиксированный полупрозрачный бар на всю ширину (`position:fixed; top:0`,
+  `z-index:20`, фон `--app-header-bg` + `backdrop-filter: blur(20px)`) — карточки
+  размываются, проезжая под ним; `.main-content` со `margin:68px auto 0` переведён на
+  `padding-top:150px` (компенсация фиксированного header, старт контента сохранён).
+  (2) Фон лого-пилюли `.brand-pill` и кнопки баланса `.trw-balance` уведён с
+  сине-серого `--app-surface-blur` на новый адаптивный токен `--app-chip-bg`
+  (`color-mix` от `--tg-theme-secondary-bg-color`) — серый под тему TG, без синего,
+  выделяется на фростед-header. (3) Новые токены `--app-header-bg`/`--app-chip-bg`
+  заведены один раз в `:root` через `color-mix` от `--app-bg`/`--app-surface` (сами
+  меняются per-theme). (4) Затемнение дока `--app-dock-bg` 0.45→0.35 (dark+light).
+  Правки — только `index.css` (саб-агент Haiku, проверено git diff). vitest 25/25, build ок.
 - **Фикс «плавающего» баланса при скролле + прозрачнее док.** (1) Экран переведён на
   паттерн внутреннего скролл-контейнера: `.main-screen` → `height:100dvh; overflow:hidden`
   (убран `padding-bottom:79px`), скролл ушёл внутрь `.main-content` (`min-height:0;
