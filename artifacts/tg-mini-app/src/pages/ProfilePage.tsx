@@ -1,4 +1,5 @@
 import { getTelegramUser } from '../lib/telegram';
+import { useTgRating } from '../lib/useTgRating';
 import { PremiumBadge } from '../components/PremiumBadge';
 import { LevelBadge } from '../components/LevelBadge';
 
@@ -13,8 +14,9 @@ export function ProfilePage() {
   const name =
     [user?.firstName, user?.lastName].filter(Boolean).join(' ') || 'Пользователь';
   const username = user?.username;
-  // Фаза B: уровень придёт из рейтинга (getChat → rating). Пока нет — значок скрыт.
-  const level: number | null = null;
+  // Уровень из Telegram-рейтинга (StarsRating) через /api/rating. Нет рейтинга — значок скрыт.
+  const rating = useTgRating();
+  const level: number | null = rating?.level ?? null;
 
   return (
     <div className="profile-page">
