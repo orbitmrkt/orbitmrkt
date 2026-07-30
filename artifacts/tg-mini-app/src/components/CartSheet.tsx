@@ -86,7 +86,7 @@ export function CartSheet({ open, onClose }: { open: boolean; onClose: () => voi
               onClick={deleteSelected}
               disabled={selCount === 0}
             >
-              Удалить выбранное{selCount > 0 ? ` · ${selCount}` : ''}
+              Удалить{selCount > 0 ? ` · ${selCount}` : ''}
             </button>
           </div>
         )}
