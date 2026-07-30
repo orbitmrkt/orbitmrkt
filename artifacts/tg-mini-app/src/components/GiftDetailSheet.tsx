@@ -9,6 +9,23 @@ import { formatGram } from '../lib/cartMath';
 import { hapticSelection, hapticImpact } from '../lib/haptics';
 import { DiamondIcon } from './icons';
 
+// Радиальный узор: символы кольцами вокруг центра (центр под моделью — чистый),
+// затухают к краям. Позиции — в процентах карточки (масштабируются).
+const PATTERN_RINGS = [
+  { r: 0.359, n: 7, size: 0.088, op: 0.4 },
+  { r: 0.488, n: 10, size: 0.082, op: 0.28 },
+  { r: 0.612, n: 11, size: 0.076, op: 0.18 },
+];
+const PATTERN_DOTS = PATTERN_RINGS.flatMap((ring) =>
+  Array.from({ length: ring.n }, (_, i) => {
+    const a = (i / ring.n) * Math.PI * 2 + ring.r * 3;
+    const cx = 50 + Math.cos(a) * ring.r * 100;
+    const cy = 50 + Math.sin(a) * ring.r * 100;
+    const s = ring.size * 100;
+    return { left: cx - s / 2, top: cy - s / 2, size: s, op: ring.op };
+  }),
+);
+
 function openTgLink(url: string) {
   try {
     const tg = (
@@ -86,14 +103,22 @@ export function GiftDetailSheet() {
             >
               {d.symbolPng && c && (
                 <div className="gd-pattern-fade">
-                  <div
-                    className="gd-pattern"
-                    style={{
-                      WebkitMaskImage: `url("${d.symbolPng}"), url("${d.symbolPng}")`,
-                      maskImage: `url("${d.symbolPng}"), url("${d.symbolPng}")`,
-                      backgroundColor: c.patternColor,
-                    }}
-                  />
+                  {PATTERN_DOTS.map((p, i) => (
+                    <div
+                      key={i}
+                      className="gd-pdot"
+                      style={{
+                        left: `${p.left}%`,
+                        top: `${p.top}%`,
+                        width: `${p.size}%`,
+                        height: `${p.size}%`,
+                        opacity: p.op,
+                        WebkitMaskImage: `url("${d.symbolPng}")`,
+                        maskImage: `url("${d.symbolPng}")`,
+                        backgroundColor: c.patternColor,
+                      }}
+                    />
+                  ))}
                 </div>
               )}
               <div className="gd-card__actions">

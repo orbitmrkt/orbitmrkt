@@ -1347,20 +1347,18 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(circle at 50% 44%, #000 38%, rgba(0, 0, 0, 0.55) 72%, transparent 100%);
-  mask-image: radial-gradient(circle at 50% 44%, #000 38%, rgba(0, 0, 0, 0.55) 72%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at 50% 46%, #000 55%, rgba(0, 0, 0, 0.4) 78%, transparent 100%);
+  mask-image: radial-gradient(circle at 50% 46%, #000 55%, rgba(0, 0, 0, 0.4) 78%, transparent 100%);
 }
-.gd-pattern {
+/* Один символ узора (позиционируется в проценте карточки). */
+.gd-pdot {
   position: absolute;
-  inset: 0;
-  /* Два слоя со смещением — staggered-грид символов, как в Telegram. */
-  -webkit-mask-repeat: repeat, repeat;
-  mask-repeat: repeat, repeat;
-  -webkit-mask-size: 56px, 56px;
-  mask-size: 56px, 56px;
-  -webkit-mask-position: 0 0, 28px 28px;
-  mask-position: 0 0, 28px 28px;
-  opacity: 0.45;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
   pointer-events: none;
 }
 .gd-card__actions {
