@@ -61,6 +61,9 @@
   `var(--app-text-strong)`, трек прогресс-бара `rgba(255,255,255,0.08)`→`var(--app-elevate)`,
   лого — класс `.load-logo` с тема-зависимым `filter` (dark `brightness(0) invert(1)` /
   light `brightness(0)`). Файлы: `App.tsx`, `index.css`. vitest 35/35, build ок. Push + deploy.
+- **Тень под эмодзи экрана загрузки.** Центральной Lottie добавлен `filter:
+  drop-shadow(0 6px 18px rgba(0,0,0,0.18))` — мягкая тень (заметна на светлой теме).
+  Только `App.tsx`, build ок. Push + deploy.
 - **Фикс «плавающего» баланса при скролле + прозрачнее док.** (1) Экран переведён на
   паттерн внутреннего скролл-контейнера: `.main-screen` → `height:100dvh; overflow:hidden`
   (убран `padding-bottom:79px`), скролл ушёл внутрь `.main-content` (`min-height:0;
