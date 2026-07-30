@@ -4,6 +4,13 @@
 
 ## 2026-07-30
 
+- **Бот @OrbitMrktBot: приветствие по /start (вебхук на Vercel).** Новый `api/bot.ts` —
+  serverless-функция Vercel: на `/start` шлёт приветствие (HTML: blockquote + i + кастом-эмодзи
+  👇 `5470177992950946662`) с инлайн-кнопкой **Open** → `t.me/OrbitMrktBot/app`. Фолбэк на
+  обычный 👇, если боту недоступны кастом-эмодзи (нужен Fragment-юзернейм). Секреты `BOT_TOKEN`
+  + `BOT_WEBHOOK_SECRET` — в Vercel env (в git НЕТ). `vercel.json` rewrite → `/((?!api/).*)`
+  (чтобы `/api/*` не перехватывался SPA). Вебхук ставится через `setWebhook` с `secret_token`.
+  Тот же `BOT_TOKEN` переиспользуется под Фазу B рейтинга (`getChat`).
 - **Профиль — Фаза A: шапка + инфраструктура значков (уровень/премиум).** Дизайн — вариант 3
   без glow (по выбору justidev). `ProfilePage`: круглый аватар (реальный `photo_url` из
   `initDataUnsafe.user`, фолбэк — инициалы), имя + **премиум-значок** (анимированный TGS,
