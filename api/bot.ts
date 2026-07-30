@@ -1,6 +1,14 @@
 // Telegram webhook для @OrbitMrktBot — приветствие по /start с кнопкой Open.
 // Serverless-функция Vercel. Секреты BOT_TOKEN / BOT_WEBHOOK_SECRET — из env (в коде их нет).
 
+// Амбиентные объявления рантайм-глобалов (без зависимости от @types/node):
+// process.env и глобальный fetch есть в Node-рантайме Vercel.
+declare const process: { env: Record<string, string | undefined> };
+declare function fetch(
+  url: string,
+  init?: { method?: string; headers?: Record<string, string>; body?: string },
+): Promise<{ json(): Promise<unknown> }>;
+
 const TOKEN = process.env.BOT_TOKEN || '';
 
 const WELCOME_HTML =
