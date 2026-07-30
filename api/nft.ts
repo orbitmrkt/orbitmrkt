@@ -22,11 +22,13 @@ export default async function handler(req: any, res: any): Promise<void> {
     const html = await r.text();
     const tableM = /tgme_gift_table[\s\S]*?<\/table>/i.exec(html);
     const ogM = /<meta property="og:image" content="([^"]+)"/i.exec(html);
+    const ogT = /<meta property="og:title" content="([^"]+)"/i.exec(html);
     res.setHeader('cache-control', 'public, max-age=300');
     res.status(200).json({
       ok: true,
       table: tableM ? tableM[0] : '',
       ogImage: ogM ? ogM[1] : null,
+      ogTitle: ogT ? ogT[1] : null,
     });
   } catch {
     res.status(502).json({ error: 'fetch_failed' });

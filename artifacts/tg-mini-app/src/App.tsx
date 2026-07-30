@@ -14,6 +14,8 @@ import BrowserGate from './components/BrowserGate';
 import { CartProvider } from './lib/cart';
 import { CartButton } from './components/CartButton';
 import { CartSheet } from './components/CartSheet';
+import { GiftDetailProvider, useGiftDetail } from './lib/giftDetail';
+import { GiftDetailSheet } from './components/GiftDetailSheet';
 import { DiamondIcon } from './components/icons';
 
 /* ─── Telegram setup ──────────────────────────────────────────────────── */
@@ -354,6 +356,30 @@ function MainScreen() {
   const [activeTab, setActiveTab] = useState(0);
   const [headerShown, setHeaderShown] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const { openGift } = useGiftDetail();
+
+  // Deep-link: ?startapp=gift_<Collection>-<number> открывает окно подарка при заходе.
+  useEffect(() => {
+    const sp = (
+      window as unknown as {
+        Telegram?: { WebApp?: { initDataUnsafe?: { start_param?: unknown } } };
+      }
+    ).Telegram?.WebApp?.initDataUnsafe?.start_param;
+    if (typeof sp !== 'string' || !sp.startsWith('gift_')) return;
+    const slug = sp.slice(5);
+    const m = /^([A-Za-z0-9]+)-(\d+)$/.exec(slug);
+    if (!m) return;
+    openGift({
+      id: slug,
+      collection: m[1],
+      name: m[1],
+      number: Number(m[2]),
+      image: `https://nft.fragment.com/gift/${slug}.medium.jpg`,
+      price: 0,
+      accent: '#000000',
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="main-screen">
@@ -386,6 +412,7 @@ function MainScreen() {
       <div className="dock-scrim" aria-hidden="true" />
       <CartButton onOpen={() => setCartOpen(true)} />
       <CartSheet open={cartOpen} onClose={() => setCartOpen(false)} />
+      <GiftDetailSheet />
       <NavBar active={activeTab} onSelect={setActiveTab} />
     </div>
   );
@@ -409,7 +436,9 @@ export default function App() {
   return loaded
     ? (
         <CartProvider>
-          <MainScreen />
+          <GiftDetailProvider>
+            <MainScreen />
+          </GiftDetailProvider>
         </CartProvider>
       )
     : <LoadingScreen onDone={() => setLoaded(true)} />;

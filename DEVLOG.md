@@ -4,6 +4,18 @@
 
 ## 2026-07-30
 
+- **Окно подарка — этап 2: рендер модели/фона/узора (changes.tg) + окно.** `api/nft.ts` теперь
+  отдаёт и `ogTitle`. `lib/changesApi.ts`(+тест): URL-билдеры model/symbol/backdrops + `findBackdrop`
+  (по имени → hex). `lib/giftDetail.tsx`: `GiftDetailProvider`/`useGiftDetail` (open/close с задержкой
+  под анимацию) + `useGiftDetails(gift)` — тянет `/api/nft` (реальные атрибуты) + changes.tg (Lottie
+  модели, PNG узора, hex-цвета фона). `components/GiftDetailSheet.tsx`: bottom-sheet с пружинкой —
+  карточка = радиальный градиент (center→edge) + узор (symbol PNG маской, тонирован patternColor,
+  тайлингом) + анимированная модель Lottie + имя/№ (textColor); кнопки глаз (`t.me/nft/slug`) и шэр
+  (`t.me/share/url?...app?startapp=gift_slug`); таблица Model/Symbol/Backdrop (реальные + редкость%),
+  Мин.цена (мок), «Сделать оффер»/«Купить» (мок-цена, haptic); футер-кредит `data · @GiftChanges`.
+  Тап по карточке (`GiftCard`) открывает окно; deep-link `startapp=gift_<slug>` открывает при заходе.
+  Провайдер обёрнут в `App`. Пайплайн провалидирован рендером (реальные данные PlushPepe). Атрибуция
+  @GiftChanges — временно в футере окна, позже перенесём в профиль Credits. vitest 94/94, build ок.
 - **Окно подарка — этап 1: реальные атрибуты NFT (без MTProto).** Слаг = `{collection}-{number}`
   (уже есть в гифтах). `api/nft.ts` (Vercel-прокси): fetch `t.me/nft/<slug>` (обход CORS Telegram),
   отдаёт `{table, ogImage}` (фрагмент `tgme_gift_table` + превью), только формат `^[A-Za-z0-9]+-\d+$`

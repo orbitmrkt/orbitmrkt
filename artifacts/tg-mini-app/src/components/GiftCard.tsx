@@ -1,10 +1,12 @@
 import { hapticSelection, hapticImpact } from '../lib/haptics';
 import { useCart } from '../lib/cart';
+import { useGiftDetail } from '../lib/giftDetail';
 import { GramIcon, BasketIcon } from './icons';
 import type { Gift } from '../lib/mockGifts';
 
 export function GiftCard({ gift }: { gift: Gift }) {
   const { has, toggle } = useCart();
+  const { openGift } = useGiftDetail();
   const inBasket = has(gift.id);
 
   return (
@@ -12,7 +14,10 @@ export function GiftCard({ gift }: { gift: Gift }) {
       <button
         type="button"
         className="gift-card__media"
-        onClick={() => hapticSelection()}
+        onClick={() => {
+          hapticSelection();
+          openGift(gift);
+        }}
         aria-label={`${gift.name} #${gift.number}`}
       >
         <img
