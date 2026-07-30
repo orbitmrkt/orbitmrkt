@@ -11,6 +11,9 @@ import { useTelegramTheme } from './lib/theme';
 import { useTelegramInsets } from './lib/insets';
 import { isHeaderRevealed } from './lib/scroll';
 import BrowserGate from './components/BrowserGate';
+import { CartProvider } from './lib/cart';
+import { CartButton } from './components/CartButton';
+import { CartSheet } from './components/CartSheet';
 
 /* ─── Telegram setup ──────────────────────────────────────────────────── */
 
@@ -333,6 +336,7 @@ import { ProfilePage } from './pages/ProfilePage';
 function MainScreen() {
   const [activeTab, setActiveTab] = useState(0);
   const [headerShown, setHeaderShown] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
   return (
     <div className="main-screen">
@@ -356,6 +360,8 @@ function MainScreen() {
       </div>
 
       <div className="dock-scrim" aria-hidden="true" />
+      <CartButton onOpen={() => setCartOpen(true)} />
+      <CartSheet open={cartOpen} onClose={() => setCartOpen(false)} />
       <NavBar active={activeTab} onSelect={setActiveTab} />
     </div>
   );
@@ -377,6 +383,10 @@ export default function App() {
   if (GATE_ENABLED && !inTelegram) return <BrowserGate />;
 
   return loaded
-    ? <MainScreen />
+    ? (
+        <CartProvider>
+          <MainScreen />
+        </CartProvider>
+      )
     : <LoadingScreen onDone={() => setLoaded(true)} />;
 }

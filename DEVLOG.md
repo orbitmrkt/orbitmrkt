@@ -4,6 +4,22 @@
 
 ## 2026-07-30
 
+- **Фича: корзина подарков (MVP, без экрана оплаты).** Общее состояние вместо локального
+  toggle у карточки. Новые файлы: `lib/cartMath.ts` (чистые `cartTotal`/`formatGram`/
+  `pluralizeGifts` рус.склонение/`addItem`/`removeItem`/`toggleItem`) + `cartMath.test.ts`
+  (27 тестов: дубли, удаление несуществующего, точность суммы 0.1+0.2, склонение 11/21/114);
+  `lib/cart.tsx` (`CartProvider`/`useCart` — items/count/total/has/add/remove/toggle/clear);
+  `components/icons.tsx` (вынес `GramIcon`/`BasketIcon` из GiftCard, экспортируемые);
+  `components/CartButton.tsx` (плавающая кнопка справа-снизу над доком, видна при count>0,
+  сумма GRAM + склонённое кол-во); `components/CartSheet.tsx` (bottom-sheet: backdrop-fade +
+  slide-up, список картинка/имя/#номер/цена, удаление ×, пустое состояние). Правки:
+  `GiftCard.tsx` (локальный `useState` → `useCart().has/toggle`, иконки из `./icons`),
+  `App.tsx` (обёртка `<CartProvider>` вокруг `MainScreen`, рендер `CartButton`/`CartSheet`,
+  state `cartOpen`), стили `.cart-fab`/`.cart-sheet*`/`.cart-item*` в `index.css` (на токенах,
+  адаптивно). Всё на токенах темы. vitest 62/62 (35→62), build ок. Реализовано саб-агентом
+  (sonnet) по детальному спеку, проверено git diff + тесты + сборка. Отдельным шагом (позже) —
+  экран оплаты (выделение/удаление пачкой, вознаграждение, «Оплатите с помощью GRAM»).
+
 - **Фростед-header + адаптивные лого/баланс + чуть светлее док.** (1) `.main-header`
   переведён в фиксированный полупрозрачный бар на всю ширину (`position:fixed; top:0`,
   `z-index:20`, фон `--app-header-bg` + `backdrop-filter: blur(20px)`) — карточки
