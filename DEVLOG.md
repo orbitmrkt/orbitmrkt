@@ -18,6 +18,8 @@
   Правки — только `index.css` (саб-агент Haiku, проверено git diff). vitest 25/25, build ок.
   Пуш `366df5f..6f8482f` в GitHub; `vercel deploy --prod` (deployment `orbitmrkt-40frd3h7y`),
   `orbitmrkt.vercel.app` = HTTP 200.
+- **Header чуть выше.** `.main-header` `padding-bottom` 12→26px, `.main-content`
+  `padding-top` 150→164px (синхронно, без прыжка контента). Только `index.css`, build ок.
 - **Фикс «плавающего» баланса при скролле + прозрачнее док.** (1) Экран переведён на
   паттерн внутреннего скролл-контейнера: `.main-screen` → `height:100dvh; overflow:hidden`
   (убран `padding-bottom:79px`), скролл ушёл внутрь `.main-content` (`min-height:0;
