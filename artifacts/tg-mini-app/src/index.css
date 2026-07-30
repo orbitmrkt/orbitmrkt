@@ -75,6 +75,7 @@
   /* Semantic theme tokens — follow Telegram theme (--tg-theme-*) with dark fallback */
   --app-bg: var(--tg-theme-bg-color, #1c2028);
   --app-surface: var(--tg-theme-secondary-bg-color, #262c35);
+  --app-surface-blur: rgba(28, 32, 40, 0.72);
   --app-elevate: rgba(255, 255, 255, 0.07);
   --app-elevate-strong: rgba(255, 255, 255, 0.14);
   --app-elevate-active: rgba(255, 255, 255, 0.13);
@@ -106,6 +107,7 @@
 
   --app-bg: var(--tg-theme-bg-color, #ffffff);
   --app-surface: var(--tg-theme-secondary-bg-color, #f2f3f5);
+  --app-surface-blur: rgba(255, 255, 255, 0.72);
   --app-elevate: rgba(0, 0, 0, 0.05);
   --app-elevate-strong: rgba(0, 0, 0, 0.09);
   --app-elevate-active: rgba(0, 0, 0, 0.08);
@@ -177,7 +179,9 @@
   z-index: 9;
   bottom: var(--custom-safe-area-bottom, 20px);
   border-radius: 1000px;
-  background-color: var(--app-surface);
+  background-color: var(--app-surface-blur);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
   border: 1px solid var(--app-border);
   padding: 4px;
   width: calc(100% - 30px);
@@ -274,9 +278,11 @@
   height: 36px;
   padding: 0 14px;
   min-width: 90px;
-  background: var(--app-elevate);
+  background: var(--app-surface-blur);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--app-border);
   border-radius: 100px;
-  border: none;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
@@ -634,12 +640,8 @@
   padding: 8px;
   border-radius: 18px;
   background: var(--app-surface);
-  border: 1px solid var(--app-border);
   color: var(--app-text);
-}
-
-.gift-card__media-wrap {
-  position: relative;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
 }
 
 .gift-card__media {
@@ -648,7 +650,7 @@
   aspect-ratio: 1 / 1;
   padding: 0;
   border: none;
-  border-radius: 14px;
+  border-radius: 18px;
   overflow: hidden;
   background: var(--app-elevate);
   cursor: pointer;
@@ -691,6 +693,7 @@
 .gift-card__actions {
   display: flex;
   align-items: center;
+  gap: 6px;
   margin-top: 2px;
 }
 
@@ -703,7 +706,7 @@
   gap: 5px;
   height: 34px;
   padding: 0 12px;
-  border-radius: 11px;
+  border-radius: 999px;
   border: none;
   background: var(--app-accent);
   color: var(--tg-theme-button-text-color, #fff);
@@ -737,22 +740,17 @@
   text-overflow: ellipsis;
 }
 
-/* Basket — floating overlay on the top-right corner of the image */
 .gift-card__basket {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 32px;
-  height: 32px;
+  flex: none;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: 12px;
   border: none;
-  background: rgba(0, 0, 0, 0.45);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  color: #fff;
+  background: var(--app-elevate);
+  color: var(--app-text-muted);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
@@ -762,9 +760,21 @@
   height: 16px;
 }
 .gift-card__basket:active {
-  transform: scale(0.9);
+  transform: scale(0.92);
 }
 .gift-card__basket.is-in {
   background: var(--app-accent);
   color: var(--tg-theme-button-text-color, #fff);
+}
+
+/* ─── Dock scrim — fades scrolled content under the floating dock ─── */
+.dock-scrim {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 130px;
+  pointer-events: none;
+  z-index: 8;
+  background: linear-gradient(to top, var(--app-bg) 32%, transparent);
 }

@@ -350,6 +350,7 @@ function MainScreen() {
         {activeTab === 2 && <ProfilePage />}
       </div>
 
+      <div className="dock-scrim" aria-hidden="true" />
       <NavBar active={activeTab} onSelect={setActiveTab} />
     </div>
   );
