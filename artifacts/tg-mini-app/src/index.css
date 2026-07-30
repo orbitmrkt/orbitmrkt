@@ -354,7 +354,7 @@
   right: 0;
   z-index: 20;
   padding-top: 50px;
-  padding-bottom: 44px;
+  padding-bottom: 70px;
   background: var(--app-header-bg);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
@@ -393,7 +393,7 @@
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
-  padding: 182px 14px 100px;
+  padding: 208px 14px 100px;
 }
 
 /* ─── Market search bar ──────────────────────────────────────────────── */
