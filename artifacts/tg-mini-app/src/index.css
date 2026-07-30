@@ -220,6 +220,7 @@
   overflow: visible;
   /* GPU-слой: браузер меняет opacity всего слоя без перерисовки SVG-контента */
   transform: translateZ(0);
+  filter: brightness(0) invert(1);
   opacity: 0.35;
   transition: opacity 0.2s;
 }
@@ -255,6 +256,10 @@
 
 .nav-item.active .nav-icon-wrap {
   opacity: 1;
+}
+
+[data-theme='light'] .nav-item .nav-icon-wrap {
+  filter: brightness(0);
 }
 
 .nav-item.active .nav-label {
@@ -355,17 +360,25 @@
   z-index: 20;
   padding-top: 50px;
   padding-bottom: 70px;
+  pointer-events: none;
+}
+
+.main-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: var(--app-header-bg);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
   mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
   opacity: 0;
-  pointer-events: none;
   transition: opacity 0.25s ease;
+  pointer-events: none;
 }
 
-.main-header.is-visible {
+.main-header.is-visible::before {
   opacity: 1;
 }
 

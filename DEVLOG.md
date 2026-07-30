@@ -48,6 +48,13 @@
   state `headerShown` + `onScroll` на `.main-content` → класс `.is-visible`. Тесты
   `scroll.test.ts` (5) — всего vitest 35/35, build ок. Файлы: `lib/scroll.ts`(+тест),
   `App.tsx`, `index.css`. Push + deploy.
+- **Лого-пилюля видна всегда + иконки дока под тему.** (1) Фростед-фон/блюр/маску header'а
+  вынес из самого `.main-header` в `.main-header::before` (opacity 0→1 по `.is-visible`) —
+  теперь пилюля «Orbit Market» видна всегда, а на прокрутке проявляется только фон. (2) Иконки
+  дока (`logo-navbar.svg` #fff + Lottie) были захардкожены белыми → добавлен тема-зависимый
+  `filter` на `.nav-item .nav-icon-wrap`: тёмная `brightness(0) invert(1)` (белый), светлая
+  `[data-theme='light']` → `brightness(0)` (чёрный). Работает и для SVG, и для Lottie.
+  Только `index.css`, build ок. Push + deploy.
 - **Фикс «плавающего» баланса при скролле + прозрачнее док.** (1) Экран переведён на
   паттерн внутреннего скролл-контейнера: `.main-screen` → `height:100dvh; overflow:hidden`
   (убран `padding-bottom:79px`), скролл ушёл внутрь `.main-content` (`min-height:0;
