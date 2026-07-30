@@ -31,6 +31,9 @@
   всего vitest 30/30, build ок. Файлы: `lib/insets.ts`(+тест), `App.tsx`, `index.css`.
 - **Header выше (итерация).** `.main-header padding-bottom` 44→70px, `.main-content
   padding-top` 182→208px. Только `index.css`, build ок. Push + vercel prod deploy.
+- **Растушёвка нижнего края header.** В `.main-header` добавлен `mask-image:
+  linear-gradient(to bottom, #000 58%, transparent 100%)` (+ `-webkit-`) — фон и блюр
+  плавно уходят в прозрачность, без жёсткой линии обрыва. Только `index.css`. Push + deploy.
 - **Фикс «плавающего» баланса при скролле + прозрачнее док.** (1) Экран переведён на
   паттерн внутреннего скролл-контейнера: `.main-screen` → `height:100dvh; overflow:hidden`
   (убран `padding-bottom:79px`), скролл ушёл внутрь `.main-content` (`min-height:0;
