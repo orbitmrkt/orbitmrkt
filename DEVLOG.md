@@ -34,6 +34,13 @@
 - **Растушёвка нижнего края header.** В `.main-header` добавлен `mask-image:
   linear-gradient(to bottom, #000 58%, transparent 100%)` (+ `-webkit-`) — фон и блюр
   плавно уходят в прозрачность, без жёсткой линии обрыва. Только `index.css`. Push + deploy.
+- **Баланс уходит ЗА header и скроллится с контентом (не плавает).** `<TopRightWidget/>`
+  перенесён из прямого ребёнка `.main-screen` внутрь `.main-content` (первым). `.trw-root`
+  `position: fixed`→`absolute`, `z-index` 100→1; `.main-content` получил `position: relative`
+  (контекст позиционирования). Теперь баланс приклеен к странице, при скролле уезжает под
+  фиксированный фростед-header и размывается его `backdrop-filter`, а не висит фиксированно
+  поверх. Позиция под шапку ТГ сохранена (`--tg-content-top`). Файлы: `App.tsx`, `index.css`.
+  vitest 30/30, build ок. Push + deploy.
 - **Фикс «плавающего» баланса при скролле + прозрачнее док.** (1) Экран переведён на
   паттерн внутреннего скролл-контейнера: `.main-screen` → `height:100dvh; overflow:hidden`
   (убран `padding-bottom:79px`), скролл ушёл внутрь `.main-content` (`min-height:0;

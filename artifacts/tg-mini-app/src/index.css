@@ -264,14 +264,14 @@
 /* ─── Top-right widget ────────────────────────────────────────────────── */
 
 .trw-root {
-  position: fixed;
+  position: absolute;
   top: calc(var(--tg-content-top, 98px) + 6px);
   right: 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 6px;
-  z-index: 100;
+  z-index: 1;
 }
 
 .trw-balance {
@@ -390,6 +390,7 @@
 .main-content {
   flex: 1;
   min-height: 0;
+  position: relative;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   width: 100%;

@@ -334,8 +334,6 @@ function MainScreen() {
 
   return (
     <div className="main-screen">
-      <TopRightWidget />
-
       {/* Logo header */}
       <div className="main-header">
         <div className="brand-pill">
@@ -346,6 +344,7 @@ function MainScreen() {
 
       {/* Page content */}
       <div className="main-content">
+        <TopRightWidget />
         {activeTab === 0 && <MarketPage />}
         {activeTab === 1 && <GiftsPage />}
         {activeTab === 2 && <ProfilePage />}
