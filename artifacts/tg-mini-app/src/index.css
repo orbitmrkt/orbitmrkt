@@ -1526,3 +1526,27 @@
   color: var(--app-text-faint);
   padding-top: 2px;
 }
+
+/* Полноразмерный фолбэк-превью карточки (пока грузится Lottie модели) */
+.gd-card__cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+/* Скелетон строк атрибутов, пока грузятся реальные данные */
+.gd-skel {
+  display: inline-block;
+  height: 14px;
+  border-radius: 7px;
+  background: var(--app-elevate);
+  animation: gd-skel-pulse 1.2s ease-in-out infinite;
+}
+.gd-skel--sm { width: 60px; }
+.gd-skel--md { width: 96px; }
+@keyframes gd-skel-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}

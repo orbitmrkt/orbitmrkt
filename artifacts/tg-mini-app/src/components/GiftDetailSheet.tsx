@@ -122,13 +122,17 @@ export function GiftDetailSheet() {
                   <ShareIcon />
                 </button>
               </div>
-              <div className="gd-model">
-                {d.modelData ? (
+              {d.modelData ? (
+                <div className="gd-model">
                   <Lottie animationData={d.modelData as object} loop autoplay />
-                ) : (
-                  <img src={d.ogImage ?? gift.image} alt={gift.name} />
-                )}
-              </div>
+                </div>
+              ) : (
+                <img
+                  className="gd-card__cover"
+                  src={d.ogImage ?? gift.image}
+                  alt={gift.name}
+                />
+              )}
               <div className="gd-card__title" style={c ? { color: c.textColor } : undefined}>
                 <span className="gd-name">{d.name ?? gift.name}</span>
                 <span className="gd-number">#{gift.number}</span>
@@ -136,9 +140,20 @@ export function GiftDetailSheet() {
             </div>
 
             <div className="gd-attrs">
-              <AttrRow label="Model" attr={d.attrs?.model} />
-              <AttrRow label="Symbol" attr={d.attrs?.symbol} />
-              <AttrRow label="Backdrop" attr={d.attrs?.backdrop} />
+              {d.attrs ? (
+                <>
+                  <AttrRow label="Model" attr={d.attrs.model} />
+                  <AttrRow label="Symbol" attr={d.attrs.symbol} />
+                  <AttrRow label="Backdrop" attr={d.attrs.backdrop} />
+                </>
+              ) : (
+                [0, 1, 2].map((i) => (
+                  <div className="gd-attr" key={i}>
+                    <span className="gd-skel gd-skel--sm" />
+                    <span className="gd-skel gd-skel--md" />
+                  </div>
+                ))
+              )}
               <div className="gd-attr gd-attr--min">
                 <span className="gd-attr__label">Мин. цена</span>
                 <span className="gd-attr__price">
