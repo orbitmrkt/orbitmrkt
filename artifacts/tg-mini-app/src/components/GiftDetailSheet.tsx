@@ -116,7 +116,9 @@ export function GiftDetailSheet() {
                 </button>
               </div>
               <div className="gd-card__title">
-                <span className="gd-name">{d.name ?? gift.name}</span>
+                <span className="gd-name">
+                  {(d.name ?? gift.name).replace(/\s*#\d+\s*$/, '')}
+                </span>
                 <span className="gd-number">#{gift.number}</span>
               </div>
             </div>
@@ -152,9 +154,12 @@ export function GiftDetailSheet() {
                 Сделать оффер
               </button>
               <button type="button" className="gd-buy" onClick={() => hapticImpact('light')}>
-                Купить за {formatGram(gift.price)}
-                <span className="gd-coin">
-                  <DiamondIcon />
+                <span className="gd-buy__label">Купить за</span>
+                <span className="gd-buy__price">
+                  {formatGram(gift.price)}
+                  <span className="gd-coin">
+                    <DiamondIcon />
+                  </span>
                 </span>
               </button>
             </div>
