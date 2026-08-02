@@ -15,7 +15,8 @@ export default defineConfig({
     react(),
     svgr(),
     tailwindcss(),
-    // Obfuscate only in production builds
+    // Obfuscate only in production builds (disabled for troubleshooting rendering issue)
+    /*
     ...(process.env.NODE_ENV === 'production'
       ? [
           javaScriptObfuscator({
@@ -42,6 +43,7 @@ export default defineConfig({
           }),
         ]
       : []),
+    */
   ],
   resolve: {
     alias: {
