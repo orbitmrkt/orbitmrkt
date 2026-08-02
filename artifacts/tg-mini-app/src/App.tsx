@@ -422,7 +422,7 @@ function MainScreen() {
 
 // 403-гейт: вход только из Telegram. Отключить на период разработки — GATE_ENABLED = false
 // (тогда приложение открывается и в обычном браузере).
-const GATE_ENABLED: boolean = true;
+const GATE_ENABLED: boolean = false;
 
 export default function App() {
   const inTelegram = isInTelegram();
