@@ -277,7 +277,7 @@
 
 .trw-root {
   position: absolute;
-  top: calc(var(--tg-content-top, 16px) + 6px);
+  top: calc(var(--tg-content-top, 98px) + 6px);
   right: 16px;
   display: flex;
   flex-direction: row;
@@ -376,8 +376,8 @@
   left: 0;
   right: 0;
   z-index: 20;
-  padding-top: calc(var(--tg-content-top, 16px) + 6px);
-  padding-bottom: 24px;
+  padding-top: 50px;
+  padding-bottom: 40px;
   pointer-events: none;
 }
 
@@ -455,7 +455,7 @@
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
-  padding: calc(var(--tg-content-top, 16px) + 64px) 14px 100px;
+  padding: 168px 14px 100px;
 }
 
 /* ─── Market search bar ──────────────────────────────────────────────── */

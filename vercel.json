@@ -5,6 +5,6 @@
   "outputDirectory": "artifacts/tg-mini-app/dist/public",
   "framework": null,
   "rewrites": [
-    { "source": "/((?!api/|assets/|favicon.png|apple-touch-icon.png|animation.json|robots.txt).*)", "destination": "/index.html" }
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
